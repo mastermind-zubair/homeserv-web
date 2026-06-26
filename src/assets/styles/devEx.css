@@ -1,0 +1,215 @@
+.dx-widget {
+  font-size: 11px;
+}
+.dx-box-item-content {
+  font-size: 11px;
+}
+
+.dx-datagrid-content {
+  font-weight: 11px;
+}
+
+.dx-header-row {
+  background-color: #1c78bc;
+  color: #efefef;
+  text-align: left;
+}
+
+.dx-cell-focus-disabled {
+  /* text-align: center;
+  font-weight: bold;
+  font-size: 16px; */
+}
+.dx-datagrid .dx-datagrid-content-fixed .dx-datagrid-table .dx-col-fixed {
+  /* background-color: transparent; */
+}
+/*GRID HEADER*/
+
+td[role="columnheader"] {
+  text-align: left !important;
+}
+.dx-datagrid-headers {
+  position: sticky;
+  /* top: 70px; */
+  z-index: 999;
+}
+.dx-datagrid-header-panel {
+  position: sticky;
+  top: 20px;
+}
+.dx-datagrid .dx-datagrid-headers .dx-header-filter,
+.dx-datagrid .dx-datagrid-headers .dx-header-row > td {
+  outline: 0;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.dx-datagrid-nowrap,
+.dx-datagrid-nowrap .dx-header-row > td > .dx-datagrid-text-content {
+  white-space: normal;
+  text-align: left;
+}
+
+.dx-datagrid.dx-datagrid-borders > .dx-datagrid-header-panel {
+  border-bottom: 0;
+  border-top: 0;
+  background-color: transparent;
+}
+
+.dx-datagrid.dx-datagrid-borders > .dx-datagrid-pager {
+  border-top: 0;
+}
+
+.dx-toolbar-items-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+/*Group CELL*/
+.dx-group-cell {
+  font-weight: 500;
+  color: #444;
+}
+
+/*GRID CELL*/
+.dx-datagrid-content .dx-datagrid-table .dx-row > td,
+.dx-datagrid-content .dx-datagrid-table .dx-row > tr > td {
+  font-size: 12px;
+}
+
+.auto-table {
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.dx-field-item-label-text {
+  font-weight: bold;
+}
+
+/*for dxDataGrid toolbar - SearchPanel to be on left*/
+.dx-toolbar .dx-toolbar-after {
+  right: 0;
+  padding-right: 0px;
+}
+
+.dx-datagrid-search-panel {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.dx-fileuploader-wrapper {
+  padding: 0px;
+  padding-bottom: 8px;
+  background-color: #eee;
+}
+.dx-datagrid-rowsview {
+  border-top: 1px solid #fff;
+}
+
+/*PAGER SELECTION*/
+.dx-pager .dx-pages .dx-selection {
+  color: #555;
+  border-color: transparent;
+  background-color: #ccc;
+}
+/*for dxDataGrid toolbar - export controls to be on right*/
+/* .dx-toolbar-after .dx-toolbar-item:first-child {
+  padding: 0;
+  right: 0;
+  position: absolute;
+} */
+
+/*Form Group Item*/
+.dx-form-group-caption {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1ac489;
+}
+
+.center-screen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+.dx-datagrid .dx-header-filter {
+  position: relative;
+  color: #ff8800;
+  font: 14px/1 DXIcons;
+}
+.dx-datagrid .dx-header-filter-empty {
+  position: relative;
+  color: #999;
+  font: 14px/1 DXIcons;
+}
+
+.dx-theme-generic-typography a {
+  color: #f2f2f2;
+}
+
+.dx-group-panel-message {
+  font-size: smaller;
+  margin-top: 15px;
+  margin-left: -5px;
+}
+
+.dx-datagrid .dx-row-lines > td {
+  border-bottom: 1px solid #fff;
+  border-top: 1px solid #fff;
+}
+.dx-datagrid-borders > .dx-datagrid-total-footer {
+  border-left: 0;
+  border-right: 0;
+}
+
+.dx-datagrid-pager {
+  border-top: 3px double #fff;
+}
+.dx-datagrid-borders {
+  border: solid 1px white;
+}
+
+.dx-page-sizes,
+.dx-pages {
+  font-size: small;
+}
+
+.dx-checkbox-container {
+  border: solid 1px #bbb;
+}
+
+.dx-datagrid .dx-link-delete {
+  color: #c74256;
+}
+
+.dx-datagrid .dx-link-edit {
+  color: #1c78bc;
+}
+
+.dx-datagrid-borders > .dx-datagrid-headers {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+}
+
+.dx-datagrid-content .dx-datagrid-table .dx-row > td {
+  border-left: solid 2px #f2f2f2;
+  border-right: solid 2px #f2f2f2;
+  vertical-align: middle;
+}
+.dx-datagrid-content .dx-datagrid-table .dx-row > td:last-child {
+  border-left: solid 2px #fff;
+  border-right: solid 2px #fff;
+}
+.dx-datagrid-content .dx-datagrid-table .dx-row:first-child > td[role="columnheader"] {
+  border-left: solid 2px #fff;
+  border-right: solid 2px #fff;
+}

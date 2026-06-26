@@ -1,0 +1,405 @@
+{
+  "Header": {
+    "title": "Staying profitable isn't just about sales,<br/> It's about staying efficient too.",
+    "paragraph": "Service Vault introduces a new AI powered job management software solution that will save your staff man hours,<br/> increasing productivivty and keeping your entire team on the same page."
+  },
+  "About": {
+    "Heading":"Service Vault is the only software that is a multilingual all in one solution",
+    "paragraph": "Service Vault is a software platform and mobile app that helps entrepreneurs in the service trades operate their businesses from taking service calls to dispatching technicians, accepting payments, and managing payroll, as well as producing and analysing their P&LS.",
+    "Why": [
+      "Lorem ipsum dolor",
+      "Tempor incididunt",
+      "Lorem ipsum dolor",
+      "Incididunt ut labore"
+    ],
+    "Why2": [
+      "Aliquip ex ea commodo",
+      "Lorem ipsum dolor",
+      "Exercitation ullamco",
+      "Lorem ipsum dolor"
+    ]
+  },
+  "Services": [
+    {
+      "icon": "fa fa-wordpress",
+      "name": "Lorem ipsum dolor",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+    },
+    {
+      "icon": "fa fa-cart-arrow-down",
+      "name": "Consectetur adipiscing",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+    },
+    {
+      "icon": "fa fa-cloud-download",
+      "name": "Lorem ipsum dolor",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+    },
+    {
+      "icon": "fa fa-language",
+      "name": "Consectetur adipiscing",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+    },
+    {
+      "icon": "fa fa-plane",
+      "name": "Lorem ipsum dolor",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+    },
+    {
+      "icon": "fa fa-pie-chart",
+      "name": "Consectetur adipiscing",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+    }
+  ],
+  "Contact": {
+    "address": "4321 California St, San Francisco, CA 12345 ",
+    "phone": "+1 123 456 1234",
+    "email": "info@company.com",
+    "facebook": "fb.com",
+    "twitter": "twitter.com",
+    "youtube": "youtube.com"
+  },
+  "Features": [
+    {
+      "icon": "img/brands/aws_logo.jpg",
+      "title": "Lorem ipsum",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "icon": "img/brands/myob.jpg",
+      "title": "Lorem ipsum",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "icon": "img/brands/quick_book.jpg",
+      "title": "Lorem ipsum",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "icon": "img/brands/twillio_logo.jpg",
+      "title": "Lorem ipsum",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "icon": "img/brands/xero.jpg",
+      "title": "Lorem ipsum",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    }
+    
+  ],
+  "FeaturesPage": [
+    {
+      "image": "fa fa-language fa-4x",
+      "title": "Multilingual Software",
+      "text": "Service Vault is the only job management software available in multiple languages"
+    },
+    {
+      "image": "fas fa-tachometer-alt fa-4x",
+      "title": "Dashboard",
+      "text": "Get a complete view of your business performance in real-time, right from your dashboard."
+    },
+    {
+      "image": "fa fa-book fa-4x",
+      "title": "Book a Job",
+      "text": "Service Vault booking platform has a easy to use interface, it can be customized to suit your business and industry needs."
+    },
+    {
+      "image": "fa fa-headset fa-4x",
+      "title": "Call Tracking",
+      "text": "Service Vault call tracking software helps businesses become widly sucessfull by reducing customer acquisition cost and increasing revenue 10X."
+    },
+    {
+      "image": "fa fa-chalkboard-teacher fa-4x",
+      "title": "Job Search",
+      "text": "Easily search for past,current and future jobs in real time. Service Vault software will show you in real-time if your job is efficent or if you are lossing money."
+    },
+    {
+      "image": "fa fa-calendar-alt fa-4x",
+      "title": "Dispatching",
+      "text": "Service Vault dispatch board helps today's service companies optimize technician tracking so everyone stays on time."
+    },
+    {
+      "image": "fa fa-book-open fa-4x",
+      "title": "Price Book",
+      "text": "Service Vault's flat rate price book saves time and provides peace of mind to business owners looking to get the most out of every job."
+    },
+    {
+      "image": "fa fa-dolly-flatbed fa-4x",
+      "title": "Inventory",
+      "text": "Enjoy real-time stock visibility and maxmise control, saving your staff time and money."
+    },
+    {
+      "image": "far fa-file-alt fa-4x",
+      "title": "Reports",
+      "text": "You can't grow your business without understanding what works & what does't. Service Vault has over 15 types of predefined reports at a click of button, making it quick and easy for you to know your numbers in real time."
+    },
+    {
+      "image": "fa fa-calculator fa-4x",
+      "title": "Accounting",
+      "text": "Service Vault allows you to manage all your accounting in the one place, it works with your current cloud based accounting software making reconcilliation a breeze."
+    },
+    {
+      "image": "fa fa-bullhorn fa-4x",
+      "title": "Outbound",
+      "text": "Service Vault outbound marketing feature lets you create the campaign you need to engage your customers at every step of thier journey"
+    },
+    {
+      "image": "fas fa-car fa-4x",
+      "title": "Fleet Management",
+      "text": "Service Vault fleet management feature has everything you need to keep your fleet moving."
+    }
+    
+  ],
+  "Industries": [
+    {
+      "image": "img/industries/Appliance-repair.png",
+      "title": "Appliance Repair",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Carpet-Cleaning.png",
+      "title": "Carpet Cleaning",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Commercial-cleaning.png",
+      "title": "Commercial cleaning",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Construction.png",
+      "title": "Construction",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Electrical.png",
+      "title": "Electrical",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Fire-protection-services.png",
+      "title": "Fire Protection Services",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Flooring.png",
+      "title": "Flooring",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Garage-Door-Services.png",
+      "title": "Garage Door Services",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Gutter-cleaning.png",
+      "title": "Gutter Cleaning",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Handyman.png",
+      "title": "Handyman",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/HVAC.png",
+      "title": "HVAC",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Landscaping.png",
+      "title": "Landscaping",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Lawn-Services.png",
+      "title": "Lawn Services",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Locksmith-services.png",
+      "title": "Locksmith Services",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Mobile-mechanic.png",
+      "title": "Mobile Mechanic",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Painting.png",
+      "title": "Painting",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Pest-control.png",
+      "title": "Pest Control",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Plumbing.png",
+      "title": "Plumbing",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Pool-&-Spa-Services.png",
+      "title": "Pool & Spa Services",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Pressure-Washing.png",
+      "title": "Pressure Washing",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Property-maintenance.png",
+      "title": "Property Maintenance",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Roofing.png",
+      "title": "Roofing",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Scaffolding.png",
+      "title": "Scaffolding",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    },
+    {
+      "image": "img/industries/Tree-Care.png",
+      "title": "Tree Care",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    }, {
+      "image": "img/industries/Window-Cleaning.png",
+      "title": "Window Cleaning",
+      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+    }
+   
+  ],
+  "Pricing": [
+    {
+      "name": "SV Lite",
+      "price": "35",
+      "ismonthly": true,
+      "users": "1 User"
+    },
+    {
+      "name": "SV Lite",
+      "price": "97",
+      "ismonthly": true,
+      "users": "1-3 Users"
+    },
+    {
+      "name": "SV Lite",
+      "price": "165",
+      "ismonthly": true,
+      "users": "3-5 Users"
+    },
+    {
+      "name": "SV Lite",
+      "price": "325",
+      "ismonthly": true,
+      "users": "5-10 Users"
+    },
+    {
+      "name": "SV Lite",
+      "price": "0",
+      "ismonthly": true,
+      "users": "10+ Users"
+    },
+    {
+      "name": "SV Grow",
+      "price": "79",
+      "ismonthly": true,
+      "users": "1 User"
+    },
+    {
+      "name": "SV Grow",
+      "price": "197",
+      "ismonthly": true,
+      "users": "1 - 3 Users"
+    },
+    {
+      "name": "SV Grow",
+      "price": "315",
+      "ismonthly": true,
+      "users": "3 - 5 Users"
+    },
+    {
+      "name": "SV Grow",
+      "price": "610",
+      "ismonthly": true,
+      "users": "5 - 10 Users"
+    },
+    {
+      "name": "SV Grow",
+      "price": "0",
+      "ismonthly": true,
+      "users": "10 + Users"
+    },
+      
+
+    {
+      "name": "SV Lite",
+      "price": "360",
+      "ismonthly": false,
+      "users": "1 User"
+    },
+    {
+      "name": "SV Lite",
+      "price": "1,080",
+      "ismonthly": false,
+      "users": "1 - 3 Users"
+    },
+    {
+      "name": "SV Lite",
+      "price": "1,800",
+      "ismonthly": false,
+      "users": "3 - 5 Users"
+    },
+    {
+      "name": "SV Lite",
+      "price": "3,000",
+      "ismonthly": false,
+      "users": "5 - 10 Users"
+    },
+    {
+      "name": "SV Lite",
+      "price": "0",
+      "ismonthly": false,
+      "users": "10 + Users"
+    },
+    {
+      "name": "SV Grow",
+      "price": "708",
+      "ismonthly": false,
+      "users": "1 User"
+    },
+    {
+      "name": "SV Grow",
+      "price": "1,884",
+      "ismonthly": false,
+      "users": "1 - 3 Users"
+    },
+    {
+      "name": "SV Grow",
+      "price": "3,060",
+      "ismonthly": false,
+      "users": "3 - 5 Users"
+    },
+    {
+      "name": "SV Grow",
+      "price": "6,000",
+      "ismonthly": false,
+      "users": "5 - 10 Users"
+    },
+    {
+      "name": "SV Grow",
+      "price": "0",
+      "ismonthly": false,
+      "users": "10 + Users"
+    }
+    
+  ]
+}

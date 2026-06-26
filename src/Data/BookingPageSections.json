@@ -1,0 +1,23 @@
+[
+  {
+    "id": "discount_tag",
+    "name": "Discount Tag",
+    "include": false
+  },
+  {
+    "id": "job_priority",
+    "name": "Job Priority",
+    "include": false
+  },
+  {
+    "id": "job_tag",
+    "name": "Job Tag",
+    "include": false
+  },
+
+  {
+    "id": "service_type",
+    "name": "Service Type",
+    "include": false
+  }
+]

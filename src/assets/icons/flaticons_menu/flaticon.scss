@@ -1,0 +1,73 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?e67b3c141bd8267235eb3508971b1860") format("truetype"),
+url("./flaticon.woff?e67b3c141bd8267235eb3508971b1860") format("woff"),
+url("./flaticon.woff2?e67b3c141bd8267235eb3508971b1860") format("woff2"),
+url("./flaticon.eot?e67b3c141bd8267235eb3508971b1860#iefix") format("embedded-opentype"),
+url("./flaticon.svg?e67b3c141bd8267235eb3508971b1860#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "open-book": "\f101",
+    "mechanical-gears": "\f102",
+    "tasks": "\f103",
+    "demostration": "\f104",
+    "calculator": "\f105",
+    "file": "\f106",
+    "luggage-cart": "\f107",
+    "calendar": "\f108",
+    "user-key-on-screen": "\f109",
+    "headphones": "\f10a",
+    "resume-and-cv": "\f10b",
+    "speedometer": "\f10c",
+);
+
+.flaticon-open-book:before {
+    content: map-get($flaticon-map, "open-book");
+}
+.flaticon-mechanical-gears:before {
+    content: map-get($flaticon-map, "mechanical-gears");
+}
+.flaticon-tasks:before {
+    content: map-get($flaticon-map, "tasks");
+}
+.flaticon-demostration:before {
+    content: map-get($flaticon-map, "demostration");
+}
+.flaticon-calculator:before {
+    content: map-get($flaticon-map, "calculator");
+}
+.flaticon-file:before {
+    content: map-get($flaticon-map, "file");
+}
+.flaticon-luggage-cart:before {
+    content: map-get($flaticon-map, "luggage-cart");
+}
+.flaticon-calendar:before {
+    content: map-get($flaticon-map, "calendar");
+}
+.flaticon-user-key-on-screen:before {
+    content: map-get($flaticon-map, "user-key-on-screen");
+}
+.flaticon-headphones:before {
+    content: map-get($flaticon-map, "headphones");
+}
+.flaticon-resume-and-cv:before {
+    content: map-get($flaticon-map, "resume-and-cv");
+}
+.flaticon-speedometer:before {
+    content: map-get($flaticon-map, "speedometer");
+}
