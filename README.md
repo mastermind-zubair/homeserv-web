@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+# Service Vault (HomeServ-Web)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Web client for **Service Vault**, an all-in-one job management platform for service trades. The app covers the full business workflow—from booking jobs and dispatching technicians to inventory, accounting, outbound marketing, and payments—with dedicated experiences for office staff, field technicians, and management users.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Office portal (`/app/*`)
 
-### `yarn start`
+| Module | Capabilities |
+|--------|----------------|
+| **Dashboard** | Operational overview with charts and map views |
+| **Book a Job** | Job booking and customer management |
+| **Call Tracking** | Inbound call tracking and attribution |
+| **Job Search** | Search and inspect past, current, and future jobs |
+| **Dispatching** | Scheduler and map-based technician dispatch |
+| **Price Book** | Services, categories, tasks, materials, utilities, margin matrix, option templates |
+| **Inventory** | Products, categories, trucks, suppliers, templates, reporting |
+| **Reports** | Jobs, sales, quotes, CSR, marketing, timesheets, invoices, and more |
+| **Accounting** | Purchase orders and accounts receivable |
+| **Outbound** | Quotes, email marketing, SMS campaigns, credits |
+| **Payments** | Payment processing (Stripe integration) |
+| **Settings** | Users, fleet, discounts, invoice templates, compliance documents |
+| **Quick Setup** | Organisation onboarding (industries, tags, roles, teams, lead sources) |
+| **Integrations** | Xero, MYOB, QuickBooks, WildJar, Square, Twilio, Reece inventory |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Technician portal
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Field workflow for technicians: dashboard, job list, estimates, travel/work tracking, notes, purchase orders, payments, compliance documents, fleet, and timesheets.
 
-### `yarn test`
+### Management portal
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+High-level management dashboard with aggregated metrics and map views.
 
-### `yarn build`
+### Public site
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Landing page, registration, login, password recovery, and support contact flows.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Internationalization
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+UI strings are loaded via **i18next** from `public/assets/locales/`. Supported languages include Arabic, Chinese, English, Spanish, German, Marathi, and Urdu.
 
-### `yarn eject`
+## Tech stack
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **React 17** with **Create React App** and **CRACO** (`craco-less` for Ant Design theming)
+- **React Router v5** for routing
+- **Ant Design 4** for UI components
+- **DevExtreme** for data grids
+- **Axios** for HTTP (via `BaseApiService`)
+- **i18next** / **react-i18next** for translations
+- **Stripe**, **SendGrid**, Google Maps, **react-big-scheduler**, and other supporting libraries (see `package.json`)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Prerequisites
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **Node.js** 16+ (LTS recommended)
+- **npm** (project uses `package-lock.json`)
+- A running **Service Vault API** backend (required for most functionality)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Getting started
 
-## Learn More
+### 1. Install dependencies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Configure environment
 
-### Code Splitting
+Copy the example env file and set values as needed:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+cp .env.example .env.local
+```
 
-### Analyzing the Bundle Size
+| Variable | Description |
+|----------|-------------|
+| `REACT_APP_ENV` | Target environment: `development`, `staging`, `production`, or `bilaldev` |
+| `REACT_APP_SENDGRID_API_KEY` | SendGrid API key (if client-side email helpers are enabled) |
+| `REACT_APP_MAPBOX_TOKEN` | Mapbox token for dashboard map components |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+API base URLs and OAuth callback URLs are defined per environment in `src/Environment.js`.
 
-### Making a Progressive Web App
+### 3. Start the dev server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+# Staging API (default for `npm start`)
+npm start
 
-### Advanced Configuration
+# Local API at http://localhost:8000
+npm run dev
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# Staging (explicit)
+npm run staging
 
-### Deployment
+# Production API
+npm run prod
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The app runs at [http://localhost:3000](http://localhost:3000).
 
-### `yarn build` fails to minify
+## Available scripts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Script | Description |
+|--------|-------------|
+| `npm start` | Dev server against **staging** API |
+| `npm run dev` | Dev server against **local** API (`localhost:8000`) |
+| `npm run staging` | Same as `npm start` |
+| `npm run prod` | Dev server against **production** API |
+| `npm run billi` | Local dev with `bilaldev` environment profile |
+| `npm run build` | Production build (staging env by default; uses increased Node heap) |
+| `npm test` | Run tests in watch mode |
+| `npm run eject` | Eject CRA config (one-way; generally avoid) |
+
+## Project structure
+
+```
+src/
+├── App.js                 # Root app, layout routing by role
+├── Routes.js              # Route definitions (public, website, technician, management)
+├── Environment.js         # Per-environment API URLs and integration config
+├── Pages/
+│   ├── App/               # Office portal pages
+│   ├── Public/            # Landing, auth, errors
+│   ├── Technician/        # Field technician portal
+│   └── Management/          # Management dashboard
+├── Layout/                # Web, Technician, Management, and Public layouts
+├── Services/
+│   ├── API/               # API service modules
+│   ├── AuthService.js     # Auth token and session helpers
+│   └── BaseApiService.js  # Shared Axios request layer
+├── Components/            # Shared UI (uploaders, grids, forms)
+├── Store/                 # React Context and reducers
+├── Data/                  # Navigation menu and static data
+├── Lib/                   # Form, loader, and utility helpers
+└── assets/                # Styles, icons, images
+
+public/
+└── assets/locales/        # i18n translation JSON files
+```
+
+Path aliases are configured in `jsconfig.json` with `baseUrl` set to `./src`, so imports like `Services/AuthService` resolve without relative paths.
+
+## Authentication and layouts
+
+After login, the app selects a layout based on the user role:
+
+- **Office users** → `WebLayout` with `/app/*` routes
+- **Technicians** → `TechnicianLayout`
+- **Management users** → `ManagementLayout`
+- **Unauthenticated** → `PublicLayout`
+
+Session state (token, user, organisation, technician/officer context) is held in React Context and `localStorage` via `AuthService`.
+
+## API integration
+
+All API calls go through `BaseApiService`, which attaches the auth token and targets the base URL from `Environment.js`:
+
+| `REACT_APP_ENV` | API base URL |
+|-----------------|--------------|
+| `development` / `bilaldev` | `http://localhost:8000` |
+| `staging` | `https://api-stg.servicevault.com` |
+| `production` | `https://api.servicevault.com` |
+
+Default API version path: `/v1`.
+
+## Building for production
+
+```bash
+npm run build
+```
+
+Output is written to the `build/` folder. For a production-targeted build, set `REACT_APP_ENV=production` when invoking the build command (the default `build` script currently uses the staging environment).
+
+## Related links
+
+- Marketing site: [servicevault.com](https://www.servicevault.com)
+- Production app: [app.servicevault.com](https://app.servicevault.com)
+
+## License
+
+Private — not for public distribution.
