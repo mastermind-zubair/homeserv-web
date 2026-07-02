@@ -1,6 +1,6 @@
 import { Menu, Space, Tooltip } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
-import { useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import Navigation from "Data/Navigation.js";
 import AuthService from "Services/AuthService";
@@ -134,12 +134,11 @@ const SideMenu = ({ topNav, collapsed }) => {
               {menu &&
                 menu.items &&
                 menu.show &&
-                menu.items.map((m, i) => {
+                menu.items.map((m) => {
                   return (
-                    <>
+                    <Fragment key={m.path}>
                       {m.items && m.show && (
                         <SubMenu
-                          //key={`sm_${i}`}
                           key={m.path}
                           title={
                             <span style={{ marginLeft: "10px" }}>
@@ -150,7 +149,7 @@ const SideMenu = ({ topNav, collapsed }) => {
                         >
                           {m.items.map((sm) => {
                             return (
-                              <>
+                              <Fragment key={sm.path}>
                                 {sm.show && (
                                   <Menu.Item
                                     key={`${sm.path}`}
@@ -159,7 +158,7 @@ const SideMenu = ({ topNav, collapsed }) => {
                                     {t(sm.label_key)}
                                   </Menu.Item>
                                 )}
-                              </>
+                              </Fragment>
                             );
                           })}
                         </SubMenu>
@@ -173,7 +172,7 @@ const SideMenu = ({ topNav, collapsed }) => {
                           {t(m.label_key)}
                         </Menu.Item>
                       )}
-                    </>
+                    </Fragment>
                   );
                 })}
               {/* <Menu.Item key="logout" title="Log Out" icon={getIcon("fas fa-sign-out-alt")} className="text-danger text-bold">

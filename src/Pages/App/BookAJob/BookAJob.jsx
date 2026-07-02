@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback, createRef } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 
 import { Button, Row, Col, Card, Input, Form, Radio, Checkbox, AutoComplete, Space, Modal } from "antd";
 import { notify } from "Services/ToastService";
@@ -30,7 +30,6 @@ const BookAJob = (props) => {
   const [okDialog, setOkDialog] = useState(false);
   const [jobSiteLoc, setJobSiteLoc] = useState(null);
   const [form] = Form.useForm();
-  const jobSiteRef = createRef();
 
   const initialFormValues = {
     use_contact_as_billing: true,
@@ -318,7 +317,7 @@ const BookAJob = (props) => {
                   </Form.Item>
                 </Col>
               </Row>
-              <Address ref={jobSiteRef} name="contact_address" form={form} showMap={ShowSite} map_loc={jobSiteLoc} />
+              <Address name="contact_address" form={form} showMap={ShowSite} map_loc={jobSiteLoc} />
               <Row>
                 <Col span={3}>
                   <Form.Item name="use_contact_as_billing" valuePropName="checked">

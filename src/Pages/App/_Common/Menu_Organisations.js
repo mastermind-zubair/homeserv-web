@@ -1,5 +1,5 @@
 import { BankOutlined, DownOutlined } from "@ant-design/icons";
-import { Button, Col, Dropdown, Menu, Row } from "antd";
+import { Button, Col, Dropdown, Row } from "antd";
 
 import { trackPromise } from "react-promise-tracker";
 import { Link, useHistory } from "react-router-dom";
@@ -79,51 +79,30 @@ const Menu_Organisations = () => {
     }
   };
 
-  const org_links = (
-    <>
-      {" "}
-      <Link
-        to="#"
-        style={{ marginLeft: "8px", marginRight: "5px" }}
-        className="text-success"
-        onClick={() => {
-          history.push("/app/quick-setup/organisations");
-        }}
-      >
-        <i className="fas fa-edit link text-bold mr-1"></i>
-        Manage Organisations
-      </Link>
-      {/* <br />
-      <Link
-        to="#"
-        style={{ marginLeft: "8px", marginRight: "5px" }}
-        className="text-success"
-        onClick={reloadOrganisations}
-      >
-        <i className="fas fa-sync-alt link text-bold  mr-1"></i>
-        Refresh this list
-      </Link> */}
-    </>
-  );
-
-  const menu_org = userOrgs && (
-    <Menu onClick={handleOrgClick} selectedKeys={[curOrg && curOrg.id]}>
-      {userOrgs &&
-        userOrgs.map((o) => {
-          return (
-            <Menu.Item key={o.id} title={o.name} icon={<BankOutlined />}>
-              {o.name}
-            </Menu.Item>
-          );
-        })}
-      <hr />
-      {AuthService.isOfficer() || org_links}
-    </Menu>
-  );
+  const menuItems = userOrgs
+    ? [
+        ...userOrgs.map((o) => ({
+          key: `${o.id}`,
+          label: o.name,
+          title: o.name,
+          icon: <BankOutlined />,
+        })),
+        ...(!AuthService.isOfficer()
+          ? [
+              { type: "divider" },
+              {
+                key: "manage-organisations",
+                label: "Manage Organisations",
+                icon: <i className="fas fa-edit link text-bold mr-1"></i>,
+              },
+            ]
+          : []),
+      ]
+    : [];
 
   return (
     <>
-      {menu_org && (
+      {userOrgs && (
         <Row className="ml-3 mr-3 mb-2">
           <Col xs={24} xl={24}>
             <div className="flex" style={{ verticalAlign: "bottom" }}>
@@ -146,7 +125,17 @@ const Menu_Organisations = () => {
               </Tooltip> */}
 
               <Dropdown
-                overlay={menu_org}
+                menu={{
+                  items: menuItems,
+                  onClick: (e) => {
+                    if (e.key === "manage-organisations") {
+                      history.push("/app/quick-setup/organisations");
+                      return;
+                    }
+                    handleOrgClick(e);
+                  },
+                  selectedKeys: curOrg ? [`${curOrg.id}`] : [],
+                }}
                 className="top ml-auto text-bold text-right push-right bg-warning"
                 width={150}
                 style={{
@@ -173,7 +162,7 @@ const Menu_Organisations = () => {
 
               {/* {(userOrgs && userOrgs.length > 0 && (
                 <Dropdown
-                  overlay={menu_org}
+                  menu={{ items: menuItems }}
                   className="ml-auto text-bold text-right push-right"
                   width={150}
                   style={{ minWidth: "150px", fontSize: "10px" }}
