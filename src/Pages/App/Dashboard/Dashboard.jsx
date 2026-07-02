@@ -21,6 +21,16 @@ import Context from "Store/Context";
 import { useTranslation } from "react-i18next";
 import environment from "../../../Environment";
 
+const emptyDashboardData = {
+  total_booked_jobs: [],
+  average_sales: [],
+  total_jobs_won: [],
+  total_converted: [],
+  industry_wise: [],
+  expense_revenue: [],
+  country_wise: [],
+};
+
 const Dashboard = (props) => {
   const dateFormat = "DD/MM/YYYY";
   const [rangeValue, setRangeValue] = useState([moment(), moment()]);
@@ -30,13 +40,18 @@ const Dashboard = (props) => {
   const { curOrg: organisation } = useContext(Context);
 
   const loadData = useCallback(async (organisation_id, time_span, range) => {
-    const { data } = await DefaultService.GetStatistics(
-      organisation_id,
-      time_span,
-      range[0].format(environment.API_DATE_FORMAT),
-      range[1].format(environment.API_DATE_FORMAT)
-    );
-    setData(data);
+    try {
+      const { data } = await DefaultService.GetStatistics(
+        organisation_id,
+        time_span,
+        range[0].format(environment.API_DATE_FORMAT),
+        range[1].format(environment.API_DATE_FORMAT)
+      );
+      setData({ ...emptyDashboardData, ...(data || {}) });
+    } catch (error) {
+      console.error("Failed to load dashboard statistics", error);
+      setData(emptyDashboardData);
+    }
   }, []);
 
   useEffect(() => {
@@ -104,6 +119,15 @@ const Dashboard = (props) => {
       </>
     );
   else
+    {
+      const totalBookedJobs = Data.total_booked_jobs || [];
+      const averageSales = Data.average_sales || [];
+      const totalJobsWon = Data.total_jobs_won || [];
+      const totalConverted = Data.total_converted || [];
+      const industryWise = Data.industry_wise || [];
+      const expenseRevenue = Data.expense_revenue || [];
+      const countryWise = Data.country_wise || [];
+
     return (
       <>
         <Space direction="vertical" size="middle" style={{ display: "flex" }}>
@@ -133,7 +157,7 @@ const Dashboard = (props) => {
                 <Row>
                   <Col span={24}>
                     <Statistic
-                      value={Data.total_booked_jobs.reduce(
+                      value={totalBookedJobs.reduce(
                         (pv, cv) => pv + +cv.value,
                         0
                       )}
@@ -144,7 +168,7 @@ const Dashboard = (props) => {
                 <Row>
                   <Col span={24}>
                     <AreaChart
-                      data={Data.total_booked_jobs || []}
+                      data={totalBookedJobs}
                       xField={"timePeriod"}
                       yField={"value"}
                     />
@@ -157,7 +181,7 @@ const Dashboard = (props) => {
                 <Row>
                   <Col span={24}>
                     <Statistic
-                      value={Data.average_sales.reduce(
+                      value={averageSales.reduce(
                         (pv, cv) => Math.round(pv + +cv.value),
                         0
                       )}
@@ -168,13 +192,11 @@ const Dashboard = (props) => {
                 </Row>
                 <Row>
                   <Col span={24}>
-                    {Data.average_sales && (
-                      <AreaChart
-                        data={Data.average_sales || []}
-                        xField={"timePeriod"}
-                        yField={"value"}
-                      />
-                    )}
+                    <AreaChart
+                      data={averageSales}
+                      xField={"timePeriod"}
+                      yField={"value"}
+                    />
                   </Col>
                 </Row>
               </Card>
@@ -184,11 +206,11 @@ const Dashboard = (props) => {
                 <Row>
                   <Col span={24}>
                     <DoughnutChartThin
-                      data={Data.total_jobs_won || []}
+                      data={totalJobsWon}
                       label={
-                        Data.total_jobs_won.length === 0
+                        totalJobsWon.length === 0
                           ? 0
-                          : Data.total_jobs_won[0].value
+                          : totalJobsWon[0].value
                       }
                     />
                   </Col>
@@ -200,11 +222,11 @@ const Dashboard = (props) => {
                 <Row>
                   <Col span={24}>
                     <DoughnutChartThin
-                      data={Data.total_converted || []}
+                      data={totalConverted}
                       label={`${
-                        Data.total_converted.length === 0
+                        totalConverted.length === 0
                           ? 0
-                          : Data.total_converted[0].value
+                          : totalConverted[0].value
                       }%`}
                     />
                   </Col>
@@ -216,8 +238,8 @@ const Dashboard = (props) => {
                 <Row>
                   <Col span={24}>
                     <DoughnutChartThin
-                      data={Data.industry_wise || []}
-                      label={Data.industry_wise.reduce(
+                      data={industryWise}
+                      label={industryWise.reduce(
                         (pv, cv) => pv + cv.value,
                         0
                       )}
@@ -232,7 +254,7 @@ const Dashboard = (props) => {
               <Card title={t("dashboard_h_expense_and_revenue")}>
                 <Row gutter={5}>
                   <Col span={24}>
-                    <MultipleAreaChart data={Data.expense_revenue || []} />
+                    <MultipleAreaChart data={expenseRevenue} />
                   </Col>
                 </Row>
               </Card>
@@ -241,7 +263,7 @@ const Dashboard = (props) => {
               <Card title={t("dashboard_h_job_heat_map")}>
                 <Row gutter={5}>
                   <Col span={24}>
-                    <GMapArea jobs={Data.country_wise} />
+                    <GMapArea jobs={countryWise} />
                   </Col>
                 </Row>
               </Card>
@@ -250,6 +272,7 @@ const Dashboard = (props) => {
         </Space>
       </>
     );
+  }
 };
 
 export default Dashboard;

@@ -14,8 +14,15 @@ import AuthService from "Services/AuthService";
 
 const { Header, Content, Sider } = Layout;
 const APP_PREFIX = "app";
-const filterModules = (availModules, userModules) => {
-  const module_ids = userModules.map((r) => r.id);
+const filterModules = (availModules = [], userModules = []) => {
+  const safeUserModules = Array.isArray(userModules) ? userModules : [];
+  if (safeUserModules.length === 0) {
+    return availModules;
+  }
+
+  const module_ids = safeUserModules
+    .map((r) => +r.id)
+    .filter((id) => Number.isFinite(id));
   return availModules.filter((m) => module_ids.includes(+m.id));
 };
 
@@ -29,11 +36,11 @@ const WebLayout = (props) => {
   const [curPage, setCurPage] = useState();
   const [curSubPage, setCurSubPage] = useState();
   const [showSideBar, setShowSideBar] = useState(false);
-  const user = AuthService.getCurrentUser();
+  const user = AuthService.getCurrentUser() || {};
 
   var filtered_modules = filterModules(
     Navigation,
-    user.user_role.rights.modules
+    user?.user_role?.rights?.modules
   );
 
   const [modules, setModules] = useState(filtered_modules);

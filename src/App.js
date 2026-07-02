@@ -63,7 +63,7 @@ const App = ({ hideLoader }) => {
     <>
       <Context.Provider value={{ user, setUser, token, setToken, userOrgs, setUserOrgs, curOrg, setCurOrg, technician, setTechnician, officer, setOfficer }}>
         <Router history={history} forceRefresh={true}>
-          <React.Suspense fallback={LoadingPanel}>
+          <React.Suspense fallback={<LoadingPanel />}>
             <Switch>
               {isLoggedIn && isTechnician && <TechnicianLayout layout={layout} routes={technicianRoutes} history={history} />}
               {isLoggedIn && isManagement && <ManagementLayout layout={layout} routes={managementRoutes} history={history} />}
