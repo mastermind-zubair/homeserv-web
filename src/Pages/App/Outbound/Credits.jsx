@@ -24,11 +24,11 @@ function Credits() {
     const [balance, setBalance] = useState(0);
     const { curOrg: organisation, setCurOrg } = useContext(Context);
   
-    useEffect(() => {
+  useEffect(() => {
       (async() => {
         if (organisation) {
           setCurrency(organisation.currency.symbol);
-          setBalance(organisation.credits);
+          setBalance(Number(organisation.credits || 0));
           await handleSearch();
         }        
       })();
@@ -55,7 +55,7 @@ function Credits() {
           dataType: "string",
           alignment: "left",
           cellRender: (item) => {
-            return `${item.data.amount.toFixed(2)} ${currency}`;
+            return `${Number(item.data.amount || 0).toFixed(2)} ${currency}`;
           }
         },
         {
@@ -123,7 +123,10 @@ function Credits() {
         if (status) {
           setShowEditForm(false);
           handleSearch();
-          setCurOrg({ ...organisation, credits: balance + values.card_amount });
+          setCurOrg({
+            ...organisation,
+            credits: Number(balance || 0) + Number(values.card_amount || 0),
+          });
         }
       };
       const onFinishFailed = async () => {
@@ -132,7 +135,7 @@ function Credits() {
       return (
         <>
             <div className="flex mb-2">
-                <PageTitle /><h2><b>(Balance: {`${balance.toFixed(2)} ${currency}`})</b></h2>
+                <PageTitle /><h2><b>(Balance: {`${Number(balance || 0).toFixed(2)} ${currency}`})</b></h2>
                 <h3 className="push-right text-right">
                 <Tooltip
                     title={`Do you have more ${ENTITY_PLURAL}? Click here to add another`}

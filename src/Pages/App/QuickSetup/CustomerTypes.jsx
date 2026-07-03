@@ -45,7 +45,13 @@ const CustomerTypes = (props) => {
       DefaultService.Entity_List(ENTITY_API_KEY, { organisation_id: organisation.id })
     );
     data.map((d) => {
-      d.booking_page_sections = JSON.parse(d.booking_page_sections_json);
+      try {
+        d.booking_page_sections = d.booking_page_sections_json
+          ? JSON.parse(d.booking_page_sections_json)
+          : [];
+      } catch (e) {
+        d.booking_page_sections = [];
+      }
     });
     notify(message, status);
     setData(data);
@@ -129,13 +135,21 @@ const CustomerTypes = (props) => {
       caption: t("quick_setup_customer_type_grid_heading_booking_page_section"),
       dataField: "booking_page_sections_json",
       cellRender: (itemData) => {
-        let val = JSON.parse(itemData.text);
+        let val = [];
+        try {
+          val = itemData.text ? JSON.parse(itemData.text) : [];
+        } catch (e) {
+          val = [];
+        }
+        if (!Array.isArray(val)) {
+          val = [];
+        }
         return (
           <>
-            {bookingPageSections.map((v) => {
+            {(bookingPageSections || []).map((v) => {
               return (
                 <div key={v}>
-                  <Checkbox checked={val.filter((vl) => vl === v.value).length > 0} />
+                  <Checkbox checked={val.includes(v.value)} />
                   &nbsp;&nbsp; {v.label}
                 </div>
               );

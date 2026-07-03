@@ -141,7 +141,12 @@ const LinkInventorySoftware = (props) => {
       alignment: "center",
       cellRender: (d) => {
         let row = d.data;
-        let description = JSON.parse(d.data.description);
+        let description = {};
+        try {
+          description = d.data.description ? JSON.parse(d.data.description) : {};
+        } catch (e) {
+          description = {};
+        }
 
         switch (row.name.toLowerCase()) {
           case "reece": {
