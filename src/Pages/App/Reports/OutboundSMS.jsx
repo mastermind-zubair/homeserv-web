@@ -22,7 +22,7 @@ const OutboundSMS = (props) => {
   const { t } = useTranslation();
   const ENTITY = "Outbound SMS";
   const ENTITY_PLURAL = "Outbound SMS";
-  const ENTITY_API_KEY = "Outbound_SMS";
+  const ENTITY_API_KEY = "Outbound_SMS_Campaign";
   const { RangePicker } = DatePicker;
   const [form] = Form.useForm();
   const [showEditForm, setShowEditForm] = useState(false);
@@ -36,11 +36,11 @@ const OutboundSMS = (props) => {
     sDate: moment().startOf("month"),
     eDate: moment(),
   });
-  useEffect(async () => {
-    if (organisation) {
-      setDateFormat(organisation.date_format);
-      await handleSearch();
-    }
+  useEffect(() => {
+    if (!organisation) return;
+
+    setDateFormat(organisation.date_format);
+    handleSearch();
   }, [organisation]);
 
   useEffect(() => {

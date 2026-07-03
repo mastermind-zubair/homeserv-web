@@ -49,13 +49,13 @@ const Sales = (props) => {
     sDate: moment().startOf("month"),
     eDate: moment(),
   });
-  useEffect(async () => {
+  useEffect(() => {
     console.log("organisation", organisation);
     if (organisation) {
       setDateFormat(organisation.date_format);
       if (organisation.currency) setCurrency(organisation.currency.symbol);
       setTemplates(environment.SENDGRID.templates);
-      await handleSearch();
+      handleSearch();
     }
   }, [organisation]);
 
@@ -177,7 +177,7 @@ const Sales = (props) => {
             className="box mb-3"
           >
             <h3 className="text-success">
-              {data && data.total_sales_stats.total_jobs}
+              {data?.total_sales_stats?.total_jobs || 0}
             </h3>
           </Card>
         </Col>
@@ -189,7 +189,7 @@ const Sales = (props) => {
             className="box mb-3"
           >
             <h3 className="text-success">
-              {(data && data.total_sales_stats.total_sales) || 0.0} {currency}
+              {data?.total_sales_stats?.total_sales || 0.0} {currency}
             </h3>
           </Card>
         </Col>
@@ -201,7 +201,7 @@ const Sales = (props) => {
             className="box mb-3"
           >
             <h3 className="text-success">
-              {(data && data.total_sales_stats.avg_sales) || 0.0} {currency}
+              {data?.total_sales_stats?.avg_sales || 0.0} {currency}
             </h3>
           </Card>
         </Col>
@@ -213,7 +213,7 @@ const Sales = (props) => {
             className="box mb-3"
           >
             <h3 className="text-success">
-              {(data && data.total_sales_stats.high_value_job) || 0.0}{" "}
+              {data?.total_sales_stats?.high_value_job || 0.0}{" "}
               {currency}
             </h3>
           </Card>
@@ -226,7 +226,7 @@ const Sales = (props) => {
             className="box mb-3"
           >
             <h3 className="text-success">
-              {data && data.total_customer_stats.existing_customers}
+              {data?.total_customer_stats?.existing_customers || 0}
             </h3>
           </Card>
         </Col>
@@ -238,7 +238,7 @@ const Sales = (props) => {
             className="box mb-3"
           >
             <h3 className="text-success">
-              {data && data.total_customer_stats.total_new_customers}
+              {data?.total_customer_stats?.total_new_customers || 0}
             </h3>
           </Card>
         </Col>
@@ -250,7 +250,7 @@ const Sales = (props) => {
             className="box mb-3"
           >
             <h3 className="text-success">
-              {data && _.round(data.total_sales_stats.win_rate, 2) + "%"}
+              {data?.total_sales_stats ? _.round(data.total_sales_stats.win_rate, 2) + "%" : "0%"}
             </h3>
           </Card>
         </Col>
@@ -263,7 +263,7 @@ const Sales = (props) => {
             className="box mb-3"
           >
             <h3 className="text-success">
-              {data && data.total_sales_stats.pending_quotes}
+              {data?.total_sales_stats?.pending_quotes || 0}
             </h3>
           </Card>
         </Col>

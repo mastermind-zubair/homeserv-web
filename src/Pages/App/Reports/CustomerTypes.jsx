@@ -49,13 +49,14 @@ const CustomerTypes = (props) => {
     sDate: moment().startOf("month"),
     eDate: moment(),
   });
-  useEffect(async () => {
-    if (organisation) {
-      setDateFormat(organisation.date_format);
-      setTemplates(environment.SENDGRID.templates);
-      if (organisation.currency) setCurrency(organisation.currency.symbol);
-      await handleSearch();
-    }
+
+  useEffect(() => {
+    if (!organisation) return;
+
+    setDateFormat(organisation.date_format);
+    setTemplates(environment.SENDGRID.templates);
+    if (organisation.currency) setCurrency(organisation.currency.symbol);
+    handleSearch();
   }, [organisation]);
 
   useEffect(() => {
@@ -126,7 +127,7 @@ const CustomerTypes = (props) => {
         let jtags = item.data.job_tags;
         console.log(jtags);
         return jtags.map((jt) => {
-          return <li>{jt.name}</li>;
+          return <li key={jt.id || jt.name}>{jt.name}</li>;
         });
       },
     },
@@ -172,7 +173,7 @@ const CustomerTypes = (props) => {
           data.total_customer_type_stats &&
           data.total_customer_type_stats.map((d) => {
             return (
-              <Col xl={6} md={12} xs={24}>
+              <Col key={d.id || d.name} xl={6} md={12} xs={24}>
                 <Card
                   title={d.name}
                   bordered={false}

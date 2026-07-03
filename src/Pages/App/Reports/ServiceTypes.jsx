@@ -49,14 +49,15 @@ const ServiceTypes = (props) => {
     sDate: moment().startOf("month"),
     eDate: moment(),
   });
-  useEffect(async () => {
-    if (organisation) {
-      setDateFormat(organisation.date_format);
-      setTemplates(environment.SENDGRID.templates);
-      if (organisation.currency) setCurrency(organisation.currency.symbol);
-      await handleSearch();
-      console.log(organisation);
-    }
+
+  useEffect(() => {
+    if (!organisation) return;
+
+    setDateFormat(organisation.date_format);
+    setTemplates(environment.SENDGRID.templates);
+    if (organisation.currency) setCurrency(organisation.currency.symbol);
+    handleSearch();
+    console.log(organisation);
   }, [organisation]);
 
   useEffect(() => {
@@ -125,7 +126,7 @@ const ServiceTypes = (props) => {
           data.total_service_type_stats &&
           data.total_service_type_stats.map((d) => {
             return (
-              <Col xl={6} md={12} xs={24}>
+              <Col key={d.id || d.name} xl={6} md={12} xs={24}>
                 <Card
                   title={d.name}
                   bordered={false}
