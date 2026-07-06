@@ -35,7 +35,7 @@
   height: 64px;
   padding: 0 15px;
   color: rgba(0, 0, 0, 0.65);
-  line-height: 64px;
+  line-height: normal;
   background: #eee;
   border-bottom: dotted 1px #aaa;
 }
@@ -182,4 +182,25 @@ width: 50% !important;
 .ant-radio-inner::after{
 left:10px !important;
 top:10.4px !important}
+
+.ant-layout-header .logo {
+  height: var(--sv-header-height);
+  display: flex;
+  align-items: center;
+}
+
+.ant-layout-header .logo img {
+  display: block;
+  max-height: 48px;
+  max-width: 210px;
+}
+
+.ant-layout-header .top-menu,
+.ant-layout-header .top-menu-small {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+}
 

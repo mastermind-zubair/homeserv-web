@@ -7,7 +7,6 @@ import {
   Card,
   Radio,
   DatePicker,
-  Space,
   Button,
 } from "antd";
 import { DollarOutlined, FileDoneOutlined } from "@ant-design/icons";
@@ -20,6 +19,7 @@ import GMapArea from "./Components/GMapArea";
 import Context from "Store/Context";
 import { useTranslation } from "react-i18next";
 import environment from "../../../Environment";
+import { AppPage, PageSection, PageToolbar } from "../_Common/AppPage";
 
 const emptyDashboardData = {
   total_booked_jobs: [],
@@ -129,10 +129,8 @@ const Dashboard = (props) => {
       const countryWise = Data.country_wise || [];
 
     return (
-      <>
-        <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-          <Row gutter={5}>
-            <Col>
+      <AppPage className="dashboard-page">
+          <PageToolbar align="start">
               <Radio.Group value={Filter} onChange={handleFilterChange}>
                 <Radio.Button value="1">{t("general_today")}</Radio.Button>
                 <Radio.Button value="2">{t("general_this_week")} </Radio.Button>
@@ -141,18 +139,14 @@ const Dashboard = (props) => {
                 <Radio.Button value="4">{t("general_this_year")}</Radio.Button>
                 <Radio.Button value="5">{t("general_custom_dates")}</Radio.Button>
               </Radio.Group>
-            </Col>
             {enableCustom && (
-            <Col>
               <DatePicker.RangePicker disabled={!enableCustom} value={rangeValue} format={dateFormat} onChange={handleRangeChange} />
-            </Col>
             )}
-            <Col>
               <Button onClick={handleSearch}>Search</Button>
-            </Col>
-          </Row>
-          <Row gutter={5}>
-            <Col span={6}>
+          </PageToolbar>
+          <PageSection>
+          <Row gutter={[12, 12]}>
+            <Col xl={6} lg={8} md={12} xs={24}>
               <Card title={t("dashboard_h_total_booked_jobs")}>
                 <Row>
                   <Col span={24}>
@@ -176,7 +170,7 @@ const Dashboard = (props) => {
                 </Row>
               </Card>
             </Col>
-            <Col span={6}>
+            <Col xl={6} lg={8} md={12} xs={24}>
               <Card title={t("dashboard_h_average_sales")}>
                 <Row>
                   <Col span={24}>
@@ -201,7 +195,7 @@ const Dashboard = (props) => {
                 </Row>
               </Card>
             </Col>
-            <Col span={4}>
+            <Col xl={4} lg={8} md={8} xs={24}>
               <Card title={t("dashboard_h_total_jobs_won")}>
                 <Row>
                   <Col span={24}>
@@ -217,7 +211,7 @@ const Dashboard = (props) => {
                 </Row>
               </Card>
             </Col>
-            <Col span={4}>
+            <Col xl={4} lg={8} md={8} xs={24}>
               <Card title={t("dashboard_h_total_conversion")}>
                 <Row>
                   <Col span={24}>
@@ -233,7 +227,7 @@ const Dashboard = (props) => {
                 </Row>
               </Card>
             </Col>
-            <Col span={4}>
+            <Col xl={4} lg={8} md={8} xs={24}>
               <Card title={t("dashboard_h_job_tags_distribution")}>
                 <Row>
                   <Col span={24}>
@@ -249,8 +243,10 @@ const Dashboard = (props) => {
               </Card>
             </Col>
           </Row>
-          <Row gutter={5}>
-            <Col span={12}>
+          </PageSection>
+          <PageSection>
+          <Row gutter={[12, 12]}>
+            <Col lg={12} xs={24}>
               <Card title={t("dashboard_h_expense_and_revenue")}>
                 <Row gutter={5}>
                   <Col span={24}>
@@ -259,7 +255,7 @@ const Dashboard = (props) => {
                 </Row>
               </Card>
             </Col>
-            <Col span={12}>
+            <Col lg={12} xs={24}>
               <Card title={t("dashboard_h_job_heat_map")}>
                 <Row gutter={5}>
                   <Col span={24}>
@@ -269,8 +265,8 @@ const Dashboard = (props) => {
               </Card>
             </Col>
           </Row>
-        </Space>
-      </>
+          </PageSection>
+      </AppPage>
     );
   }
 };

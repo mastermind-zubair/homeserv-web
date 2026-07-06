@@ -8,6 +8,7 @@ import Address from "./Components/Address";
 import JobDetails from "./Components/JobDetails";
 import DefaultService from "Services/API/DefaultService";
 import PageTitle from "../_Common/PageTitle";
+import { AppPage, PageHeader, PageSection } from "../_Common/AppPage";
 import FormUtils from "Components/Common/FormUtils";
 import { useTranslation } from "react-i18next";
 const { InfoItem } = FormUtils;
@@ -242,11 +243,9 @@ const BookAJob = (props) => {
     await setOrgnisation(organisation.id);
   }
   return (
-    <>
-      <div className="flex mb-2">
-        <PageTitle />
-        <h3 className="push-right text-right"></h3>
-      </div>
+    <AppPage>
+      <PageHeader title={<PageTitle />} />
+      <PageSection>
       <Row gutter={5} justify="space-between">
         <Col span={24}>
           <AutoComplete
@@ -265,6 +264,7 @@ const BookAJob = (props) => {
           </AutoComplete>
         </Col>
       </Row>
+      </PageSection>
       <Row>
         <Col>
           <Modal title="Job Status" onOk={handleJobOk} onCancel={handleJobOk} visible={okDialog}>
@@ -385,7 +385,7 @@ const BookAJob = (props) => {
           </Col>
         </Row>
       </Form>
-    </>
+    </AppPage>
   );
 };
 

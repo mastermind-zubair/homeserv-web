@@ -5,6 +5,7 @@ import DefaultService from "Services/API/DefaultService";
 import { notify } from "Services/ToastService";
 import Context from "Store/Context";
 import PageTitle from "../_Common/PageTitle";
+import { AppPage, GridPanel, PageHeader, PageSection, PageToolbar } from "../_Common/AppPage";
 import SearchParameters from "./Components/SearchParameters";
 import SearchResults from "./Components/SearchResults";
 import JobCard from "./Components/JobCard";
@@ -100,31 +101,27 @@ const JobSearch = (props) => {
   }, [organisation, queryData]);
   const { t } = useTranslation();
   return (
-    <>
-      <div className="flex mb-2">
-        <PageTitle />
-        <h3 className="push-right text-right"></h3>
-      </div>
+    <AppPage>
+      <PageHeader title={<PageTitle />} />
       <Form layout="vertical" form={form} onFinish={handleSubmitQuery}>
+        <PageSection>
         <Row>
           <Col span={24}>
             <SearchParameters data={SupportData} />
           </Col>
         </Row>
-        <Row justify="end">
-          <Col>
-            <br />
+        <PageToolbar>
             <Space>
               <Button htmlType="reset">{t("general_reset")}</Button>
               <Button htmlType="submit" type="primary">
                 {t("general_submit")}
               </Button>
             </Space>
-          </Col>
-        </Row>
+        </PageToolbar>
+        </PageSection>
       </Form>
-      <Row>
-        <Col span={24}>
+      <PageSection>
+        <GridPanel>
           <SearchResults
             ENTITY={ENTITY}
             ENTITY_PLURAL={ENTITY_PLURAL}
@@ -132,8 +129,8 @@ const JobSearch = (props) => {
             handleJobCard={handleJobCard}
             dateFormat={dateFormat}
           />
-        </Col>
-      </Row>
+        </GridPanel>
+      </PageSection>
       <Modal
         title={t("dashboard_job_search_job_card")}
         visible={jobCardVisible}
@@ -143,7 +140,7 @@ const JobSearch = (props) => {
       >
         <JobCard selectedJobId={selectedJobId} dateFormat={dateFormat} />
       </Modal>
-    </>
+    </AppPage>
   );
 };
 

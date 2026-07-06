@@ -1,5 +1,195 @@
+:root {
+  --sv-header-height: 64px;
+  --sv-sidebar-width: 240px;
+  --sv-content-gutter: 24px;
+  --sv-page-gap: 16px;
+  --sv-border: #d9d9d9;
+  --sv-soft-bg: #fafafa;
+}
+
 .site-main {
-  margin-top: 55px;
+  width: 100%;
+}
+
+.app-content {
+  padding: var(--sv-content-gutter);
+  min-height: 360px;
+  padding-top: calc(var(--sv-header-height) + var(--sv-content-gutter));
+  transition: margin-left 0.2s ease;
+}
+
+.app-content-with-sidebar {
+  margin-left: calc(var(--sv-sidebar-width) - 5px);
+}
+
+.app-content-full {
+  margin-left: 0;
+}
+
+.app-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sv-page-gap);
+  width: 100%;
+}
+
+.app-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.app-page-title-block {
+  min-width: 0;
+}
+
+.app-page-title {
+  margin: 0;
+  color: #1c78bc;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.app-page-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.app-page-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.app-page-toolbar-start {
+  justify-content: flex-start;
+}
+
+.app-page-toolbar-end {
+  justify-content: flex-end;
+}
+
+.app-page-toolbar-between {
+  justify-content: space-between;
+}
+
+.app-page-section {
+  width: 100%;
+}
+
+.app-page-section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0;
+  color: #333;
+  font-weight: 600;
+}
+
+.app-page-section-title::before,
+.app-page-section-title::after {
+  content: "";
+  height: 1px;
+  background: #eee;
+  flex: 1;
+}
+
+.app-grid-panel {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.app-grid-panel .dx-widget,
+.app-grid-panel .dx-datagrid {
+  min-width: 100%;
+}
+
+.site-main > .ant-row,
+.site-main > .app-page,
+.site-main > .flex {
+  min-width: 0;
+}
+
+.site-main > .flex.mb-2,
+.app-page > .flex.mb-2 {
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.site-main > .flex.mb-2 > .push-right,
+.app-page > .flex.mb-2 > .push-right {
+  float: none;
+  margin-left: auto;
+}
+
+.site-main .ant-card {
+  min-width: 0;
+}
+
+.dispatching-page .scheduler-container,
+.dispatching-page .app-grid-panel {
+  background: #fff;
+}
+
+.dispatching-job-lanes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
+  gap: 0;
+}
+
+.dispatching-job-lanes .ant-list {
+  height: 100%;
+}
+
+.dispatching-legend {
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --sv-content-gutter: 16px;
+  }
+
+  .app-content-with-sidebar {
+    margin-left: 0;
+  }
+
+  .app-page-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .app-page-actions {
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+
+  .dispatching-job-lanes {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .app-page-title {
+    font-size: 24px;
+  }
+
+  .dispatching-job-lanes {
+    grid-template-columns: minmax(260px, 1fr);
+  }
 }
 
 .site-main-public {
@@ -46,6 +236,56 @@
   background-color: #1c78bc;
   color: #f2f2f2;
   font-weight: 500;
+}
+
+.app-nav-header {
+  align-items: center;
+  min-width: 0;
+  height: var(--sv-header-height);
+}
+
+.app-nav-menu {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.app-nav-header > .ml-auto,
+.app-nav-header > .ml-auto .ant-row,
+.app-profile-menu {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.app-nav-header > .ml-auto {
+  height: var(--sv-header-height);
+}
+
+.app-nav-header .ant-badge {
+  display: inline-flex;
+  align-items: center;
+}
+
+.app-profile-welcome {
+  max-width: 200px;
+  min-width: 96px;
+  padding: 0 10px;
+  color: #555;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.app-profile-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-profile-avatar img {
+  display: block;
 }
 
 .grey-box {

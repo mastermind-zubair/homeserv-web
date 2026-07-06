@@ -3,7 +3,6 @@ import {
   Row,
   Col,
   List,
-  Divider,
   Button,
   Switch,
   Typography,
@@ -23,6 +22,7 @@ import JobAssignment from "./Components/JobAssignment";
 import DefaultService from "Services/API/DefaultService";
 import Context from "Store/Context";
 import PageTitle from "../_Common/PageTitle";
+import { AppPage, GridPanel, PageHeader, PageSection, PageToolbar } from "../_Common/AppPage";
 import JobItem from "./Components/JobItem";
 import JobDetails from "./Components/JobDetails";
 import { JOB_STATUS } from "Pages/Common/Constants";
@@ -603,12 +603,11 @@ const Dispatching = (props) => {
     alert("Job assigned");
   };
   return (
-    <>
-      <div className="flex mb-2">
-        <PageTitle />
-      </div>
-      <Row justify="end">
-        <Col span={4}>
+    <AppPage className="dispatching-page">
+      <PageHeader
+        title={<PageTitle />}
+        actions={
+          <PageToolbar>
           <Typography.Text>Grid: </Typography.Text>
           <Switch
             checkedChildren="Open"
@@ -629,10 +628,11 @@ const Dispatching = (props) => {
           <Button type="primary" danger onClick={handleShowMap}>
             {t("general_show_map")}
           </Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col span={24}>
+          </PageToolbar>
+        }
+      />
+      <PageSection>
+        <GridPanel>
           <JobAssignment
             schedulerData={SData}
             dndSources={[dndSource]}
@@ -646,13 +646,13 @@ const Dispatching = (props) => {
             eventItemClick={eventClicked}
             viewChanged={viewChanged}
           />
-        </Col>
-      </Row>
+        </GridPanel>
+      </PageSection>
 
-      <Divider orientation="left">{t("general_job_items")} </Divider>
-      <Row forceupdate={forceupdate}>
+      <PageSection title={t("general_job_items")}>
+      <div className="dispatching-job-lanes">
         {JobStatus.map((v, i) => (
-          <Col span={6} key={i}>
+          <div key={i}>
             <List
               size="large"
               header={
@@ -672,12 +672,13 @@ const Dispatching = (props) => {
                 />
               )}
             />
-          </Col>
+          </div>
         ))}
-      </Row>
-      <Row>
+      </div>
+      </PageSection>
+      <div className="dispatching-legend">
         <JobLegend data={statusList} />
-      </Row>
+      </div>
       <Row>
         <Col>
           <JobDetails
@@ -728,7 +729,7 @@ const Dispatching = (props) => {
           )}
         </Col>
       </Row>
-    </>
+    </AppPage>
   );
 };
 

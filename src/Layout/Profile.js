@@ -90,11 +90,10 @@ const Profile = ({ layout, onLinkClicked }) => {
         content={content}
         trigger="click"
       >
-        <Row style={{ cursor: "pointer" }}>
+        <Row className="app-profile-menu" style={{ cursor: "pointer" }}>
           {layout === "full" && (
             <Col
-              className="top-menu"
-              style={{ marginTop: "10px", maxWidth: "200px" }}
+              className="app-profile-welcome"
             >
               {t("header_profile_welcome")} <br />{" "}
               <b>
@@ -106,7 +105,7 @@ const Profile = ({ layout, onLinkClicked }) => {
           <Col>
             <Avatar
               size={(layout === "full" && 52) || 32}
-              style={{ marginTop: "5px" }}
+              className="app-profile-avatar"
               icon={
                 (user && (
                   <img

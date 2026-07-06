@@ -175,12 +175,11 @@ const WebLayout = (props) => {
         </Header>
         <LoadingPanel layout={layout} />
         <Content
-          style={{
-            padding: "24px",
-            minHeight: "360px",
-            marginLeft:
-              layout === "overlay" || getFullSizedModule() ? "-5px" : "235px",
-          }}
+          className={`app-content ${
+            layout === "overlay" || getFullSizedModule()
+              ? "app-content-full"
+              : "app-content-with-sidebar"
+          }`}
         >
           <div className={`site-main`}>
             <Row

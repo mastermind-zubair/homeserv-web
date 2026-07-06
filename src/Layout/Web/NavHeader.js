@@ -102,15 +102,15 @@ const NavHeader = ({ layout, modules, curModule, onMenuButtonClicked }) => {
   );
   return (
     <>
-      <Row align="bottom" justify="start" wrap>
+      <Row align="middle" justify="start" wrap={false}>
         <Col span={24}>
-          <div className="flex">
+          <div className="flex app-nav-header">
             <div
               className="logo"
               style={{
-                display: "flex-inline",
                 width: layout === "full" ? "225px" : "70px",
                 borderRight: "solid 1px #eee",
+                flex: "0 0 auto",
               }}
             >
               <Link to="/app/dashboard">
@@ -119,7 +119,7 @@ const NavHeader = ({ layout, modules, curModule, onMenuButtonClicked }) => {
                 )}
               </Link>
             </div>
-            <Space size={layout === "full" ? 8 : 2}>
+            <Space size={layout === "full" ? 8 : 2} className="app-nav-menu">
               {layout !== "overlay" &&
                 modules.map((nav) => {
                   return (
@@ -188,9 +188,9 @@ const NavHeader = ({ layout, modules, curModule, onMenuButtonClicked }) => {
 
             <div
               className="ml-auto"
-              style={{ float: "right", textAlign: "right", marginTop: "0px" }}
+              style={{ textAlign: "right", marginTop: "0px", flex: "0 0 auto" }}
             >
-              <Row>
+              <Row wrap={false} align="middle">
                 <Col>
                   <Popover
                     placement="bottomRight"

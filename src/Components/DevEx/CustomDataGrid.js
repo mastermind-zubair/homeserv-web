@@ -179,6 +179,7 @@ const CustomDataGrid = ({
   };
 
   return (
+    <div className="app-grid-panel">
     <DataGrid
       visible={true}
       dataSource={data}
@@ -401,6 +402,7 @@ const CustomDataGrid = ({
       {hideToolbar || <Template name="deleteButtonTemplate" render={toolbarItemRender} />}
       {inlineEditing && <Editing mode="cell" allowUpdating={true} />}
     </DataGrid>
+    </div>
   );
 };
 

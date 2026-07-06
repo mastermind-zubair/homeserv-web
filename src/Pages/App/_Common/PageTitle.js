@@ -24,7 +24,7 @@ const PageTitle = ({ suffix }) => {
 
   return (
     <>
-      <h1 className="text-primary">
+      <h1 className="app-page-title">
         {title} {suffix}
         {/* Manage {ENTITY_PLURAL}{" "}
           <span className="text-grey text-small">
