@@ -36,14 +36,21 @@ const Form_FieldTechnician = ({
   onFinishFailed,
   ENTITY,
   data,
+  mode = "create",
 }) => {
-
+  const isCreateMode = mode === "create";
   //const [roles, setRoles] = useState();
-  const [passwordSettings, setPasswordSettings] = useState(recordToEdit && recordToEdit.id > 0 ? false : true);
+  const [passwordSettings, setPasswordSettings] = useState(isCreateMode);
   const { curOrg: organisation } = useContext(Context);
   const [dateFormat, setDateFormat] = useState("MM-dd-YYYY");
   const [technicianRoles, setTechnicianRoles] = useState();
   const [serviceTypes, setServiceTypes] = useState();
+  const requiredLabel = (text, required = false) => (
+    <span>
+      {text}
+      {required ? <span className="text-danger"> *</span> : null}
+    </span>
+  );
   useEffect(async () => {
     if (recordToEdit && recordToEdit.industry_id) {
       await onIndustryChanged(recordToEdit.industry_id);
@@ -52,7 +59,8 @@ const Form_FieldTechnician = ({
       recordToEdit.licenses = [];
     }
     form.setFieldsValue(recordToEdit);
-  }, [form, recordToEdit]);
+    setPasswordSettings(isCreateMode);
+  }, [form, recordToEdit, isCreateMode]);
 
   const onIndustryChanged = async (i) => {
     let tRoles = await trackPromise(LookupService.TechnicianRoles({ industry_id: i, is_active: true }));
@@ -118,24 +126,28 @@ const Form_FieldTechnician = ({
           </Form.Item>
         </Form.Item> */}
 
-        <Form.Item label={t("general_name")} style={{ marginBottom: 0 }}>
+        <Form.Item label={requiredLabel(t("general_name"), isCreateMode)} style={{ marginBottom: 0 }}>
           <Form.Item
             name="first_name"
-            rules={[{ required: true, message: "First name is required" }]}
+            rules={isCreateMode ? [{ required: true, message: "First name is required" }] : []}
             className="two-row-item"
           >
             <Input placeholder={t("quick_setup_office_users_form_first_name")} />
           </Form.Item>
           <Form.Item
             name="last_name"
-            rules={[{ required: true, message: "Last name is required" }]}
+            rules={isCreateMode ? [{ required: true, message: "Last name is required" }] : []}
             className="two-row-item"
           >
             <Input placeholder={t("quick_setup_office_users_form_last_name")} />
           </Form.Item>
         </Form.Item>
 
-        <Form.Item label={t("quick_setup_office_users_form_profile_photo")} name="profile_pic">
+        <Form.Item
+          label={requiredLabel(t("quick_setup_office_users_form_profile_photo"), isCreateMode)}
+          name="profile_pic"
+          rules={isCreateMode ? [{ required: true, message: "Profile photo is required" }] : []}
+        >
           <div className="flex">
             <div className="mr-auto">
               {t("quick_setup_office_users_form_existing_photo")} <br />
@@ -159,19 +171,19 @@ const Form_FieldTechnician = ({
         <Form.Item label={t("quick_setup_office_users_form_login_information")}>
           <Form.Item
             name="username"
-            label={t("quick_setup_office_users_form_username_email")}
-            rules={[
+            label={requiredLabel(t("quick_setup_office_users_form_username_email"), isCreateMode)}
+            rules={isCreateMode ? [
               { required: true, message: "Please input your email!" },
               { type: "email", message: "This is not a correct email address" },
-            ]}
+            ] : []}
             className="three-row-item"
           >
             <Input placeholder={t("quick_setup_office_users_form_email")} />
           </Form.Item>
           <Form.Item
             name="industry_id"
-            label={t("general_industry")}
-            rules={[{ required: true, message: "Industry is required" }]}
+            label={requiredLabel(t("general_industry"), isCreateMode)}
+            rules={isCreateMode ? [{ required: true, message: "Industry is required" }] : []}
             className="three-row-item"
           >
             <Select options={data.industries} onSelect={(i) => onIndustryChanged(i)} />
@@ -183,7 +195,7 @@ const Form_FieldTechnician = ({
 
         <Form.Item label={t("quick_setup_office_users_form_login_credentials")}>
           <div className="box-primary bg-grey p-3">
-            {recordToEdit && recordToEdit.id > 0 && (
+          {recordToEdit && recordToEdit.id > 0 && (
               <Switch
                 checked={passwordSettings}
                 checkedChildren={<span>Don't change password</span>}
@@ -196,9 +208,9 @@ const Form_FieldTechnician = ({
             {passwordSettings && (
               <>
                 <Form.Item
-                  label={t("login_label_password")}
+                  label={requiredLabel(t("login_label_password"), isCreateMode || passwordSettings)}
                   name="password"
-                  rules={[{ required: true, message: "Please input your password!" }]}
+                  rules={(isCreateMode || passwordSettings) ? [{ required: true, message: "Please input your password!" }] : []}
                   className="two-row-item"
                   hasFeedback
                 >
@@ -212,7 +224,7 @@ const Form_FieldTechnician = ({
                   className="two-row-item"
                   hasFeedback
                   rules={[
-                    { required: true, message: "Please confirm your password!" },
+                    ...(isCreateMode || passwordSettings ? [{ required: true, message: "Please confirm your password!" }] : []),
                     ({ getFieldValue }) => ({
                       validator(_, value) {
                         if (!value || getFieldValue("password") === value) {
@@ -234,8 +246,8 @@ const Form_FieldTechnician = ({
         <Form.Item label={t("quick_setup_office_users_form_contact_number")}>
           <Form.Item
             name="mobile_number"
-            label={t("quick_setup_sub_contractors_form_mobile_number")}
-            rules={[{ required: true, message: "Mobile number is required" }]}
+            label={requiredLabel(t("quick_setup_sub_contractors_form_mobile_number"), isCreateMode)}
+            rules={isCreateMode ? [{ required: true, message: "Mobile number is required" }] : []}
             className="two-row-item"
           >
             <Input placeholder={t("quick_setup_sub_contractors_form_mobile_number")} />
@@ -245,7 +257,11 @@ const Form_FieldTechnician = ({
           </Form.Item>
         </Form.Item>
 
-        <Form.Item name="address" label={t("quick_setup_office_users_form_address")}>
+        <Form.Item
+          name="address"
+          label={requiredLabel(t("quick_setup_office_users_form_address"), isCreateMode)}
+          rules={isCreateMode ? [{ required: true, message: "Address is required" }] : []}
+        >
           <Input.TextArea placeholder={t("quick_setup_office_users_form_address")} />
         </Form.Item>
 
@@ -261,18 +277,18 @@ const Form_FieldTechnician = ({
         <Form.Item>
           <Form.Item
             name="technician_role_id"
-            label={t("quick_setup_technician_role_grid_technician_role")}
+            label={requiredLabel(t("quick_setup_technician_role_grid_technician_role"), isCreateMode)}
             className="three-row-item"
-            rules={[{ required: true, message: "Please select a technician role" }]}
+            rules={isCreateMode ? [{ required: true, message: "Please select a technician role" }] : []}
           >
             <Select multiple={false} options={technicianRoles} />
           </Form.Item>
 
           <Form.Item
             name="service_type_id"
-            label={t("quick_setup_service_types_form_service_type")}
+            label={requiredLabel(t("quick_setup_service_types_form_service_type"), isCreateMode)}
             className="three-row-item"
-            rules={[{ required: true, message: "Please select a service type" }]}
+            rules={isCreateMode ? [{ required: true, message: "Please select a service type" }] : []}
           >
             <Select multiple={false} options={serviceTypes} />
           </Form.Item>

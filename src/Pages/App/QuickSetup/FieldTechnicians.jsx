@@ -25,6 +25,7 @@ const FieldTechnicians = (props) => {
 
   const [form] = Form.useForm();
   const [showEditForm, setShowEditForm] = useState(false);
+  const [formMode, setFormMode] = useState("create");
 
   const [data, setData] = useState();
   const [recordToEdit, setRecordToEdit] = useState();
@@ -101,43 +102,18 @@ const FieldTechnicians = (props) => {
   const handleEdit = async (item) => {
     //console.log("Edit Handler", item);
 
-    if (!item.licenses) {
-      item.licenses = [];
-    }
-
-    // item.skills =
-    //   item.skills &&
-    //   item.skills.map((s) => {
-    //     return s.id;
-    //   });
-    item.working_areas =
-      (item.working_areas &&
-        item.working_areas.map((w) => {
-          return w.id;
-        })) ||
-      [];
-    item.job_tags =
-      (item.job_tags &&
-        item.job_tags.map((j) => {
-          return j.id;
-        })) ||
-      [];
-
-    if (item.licenses) {
-      let moment = require("moment");
-      item.licenses = item.licenses.map((l) => {
-        return {
-          ...l,
-          expiry: moment(l.expiry),
-        };
-      });
-    }
+    const isCreateMode = !item || !item.id;
+    setFormMode(isCreateMode ? "create" : "edit");
 
     let record = {};
-    if (item.id) {
-      record = { ...item };
-    } else {
-      record.organisation_id = organisation.id;
+    if (isCreateMode) {
+      record = {
+        organisation_id: organisation.id,
+        working_areas: [],
+        job_tags: [],
+        licenses: [],
+      };
+
       let isValid = await isValidLicenseForMoreTechnicians();
       if (!isValid) {
         alertify(
@@ -147,6 +123,33 @@ const FieldTechnicians = (props) => {
         );
         return;
       }
+    } else {
+      const nextItem = { ...item };
+      nextItem.licenses = Array.isArray(nextItem.licenses) ? nextItem.licenses : [];
+      nextItem.working_areas =
+        (nextItem.working_areas &&
+          nextItem.working_areas.map((w) => {
+            return w.id;
+          })) ||
+        [];
+      nextItem.job_tags =
+        (nextItem.job_tags &&
+          nextItem.job_tags.map((j) => {
+            return j.id;
+          })) ||
+        [];
+
+      if (nextItem.licenses) {
+        let moment = require("moment");
+        nextItem.licenses = nextItem.licenses.map((l) => {
+          return {
+            ...l,
+            expiry: moment(l.expiry),
+          };
+        });
+      }
+
+      record = nextItem;
     }
     setRecordToEdit(record);
 
@@ -175,10 +178,26 @@ const FieldTechnicians = (props) => {
        formData.append("files[]", file);
      });
     */
-    let record = values;
+    let record = { ...values };
     console.log("Form values", values);
 
     //SET SOME DEFAULT VALUES HERE
+    record.working_areas = Array.isArray(record.working_areas) ? record.working_areas : [];
+    record.job_tags = Array.isArray(record.job_tags) ? record.job_tags : [];
+    record.licenses = Array.isArray(record.licenses) ? record.licenses : [];
+
+    if (formMode === "edit") {
+      Object.keys(record).forEach((field) => {
+        if (record[field] === "") {
+          delete record[field];
+        }
+      });
+      if (record.password === "") {
+        delete record.password;
+        delete record.confirmed_password;
+      }
+    }
+
     // record.skills = record.skills.map((s) => {
     //   return { id: isNaN(s) ? 0 : s, name: isNaN(s) ? s : "" };
     // });
@@ -325,6 +344,7 @@ const FieldTechnicians = (props) => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             ENTITY={ENTITY}
+            mode={formMode}
             data={{
               roles,
               organisations,

@@ -30,11 +30,22 @@ const Form_Organisation = ({
   onFinish,
   onFinishFailed,
   handleUploadChange,
+  logoImage,
+  mode = "create",
   ENTITY,
 }) => {
   const { t } = useTranslation();
   const [showTimeZone, setShowTimeZone] = useState(false);
   const [timeZoneFilter, setTimeZoneFilter] = useState("");
+  const isCreateMode = mode === "create";
+  const requiredRules = (required, message) =>
+    required ? [{ required: true, message }] : [];
+  const requiredLabel = (label, required) => (
+    <span>
+      {required ? <span className="text-danger">* </span> : null}
+      {label}
+    </span>
+  );
 
   const currencies = [
     { label: "USD", value: 1 },
@@ -77,6 +88,7 @@ const Form_Organisation = ({
           onFinishFailed={onFinishFailed}
         >
           <Form.Item name="id" hidden />
+          <Form.Item name="credits" hidden />
           <Form.Item
             name="name"
             label={t("quick_setup_organizations_modal_form_business_name")}
@@ -100,6 +112,10 @@ const Form_Organisation = ({
           <Form.Item
             name="address"
             label={t("quick_setup_organizations_modal_form_business_address")}
+            rules={requiredRules(
+              isCreateMode,
+              "Business address is required"
+            )}
           >
             <Input
               placeholder={t(
@@ -110,6 +126,7 @@ const Form_Organisation = ({
           <Form.Item
             name="acn_abn"
             label={t("quick_setup_organizations_modal_form_business_acn_abn")}
+            rules={requiredRules(isCreateMode, "Business ACN/ABN is required")}
           >
             <Input
               placeholder={t(
@@ -120,14 +137,10 @@ const Form_Organisation = ({
           <Form.Item
             name="bsb_number"
             label={t("quick_setup_organizations_modal_form_bsb_number")}
-            rules={[
-              {
-                required: true,
-                message: t(
-                  "quick_setup_organizations_modal_form_please_input_your_bsb_no."
-                ),
-              },
-            ]}
+            rules={requiredRules(
+              isCreateMode,
+              t("quick_setup_organizations_modal_form_please_input_your_bsb_no.")
+            )}
           >
             <Input
               placeholder={t(
@@ -138,14 +151,12 @@ const Form_Organisation = ({
           <Form.Item
             name="account_number"
             label={t("quick_setup_organizations_modal_form_account_no.")}
-            rules={[
-              {
-                required: true,
-                message: t(
-                  "quick_setup_organizations_modal_form_message_please_input_your_account_no."
-                ),
-              },
-            ]}
+            rules={requiredRules(
+              isCreateMode,
+              t(
+                "quick_setup_organizations_modal_form_message_please_input_your_account_no."
+              )
+            )}
           >
             <Input
               placeholder={t(
@@ -176,7 +187,7 @@ const Form_Organisation = ({
               },
             ]}
           >
-            <InputNumber addonAfter="٪" defaultValue={0.0} />
+            <InputNumber addonAfter="%" defaultValue={0.0} />
           </Form.Item>
 
           <Form.Item
@@ -258,6 +269,7 @@ const Form_Organisation = ({
             label={t(
               "quick_setup_organizations_modal_form_make_default_organization"
             )}
+            rules={requiredRules(isCreateMode, "Default organisation value is required")}
           >
             <Switch
               checkedChildren={
@@ -267,8 +279,18 @@ const Form_Organisation = ({
           </Form.Item>
           <Form.Item
             name="business_logo"
-            label={t("general_logo_only_jpg_png_bmp")}
+            label={requiredLabel(t("general_logo_only_jpg_png_bmp"), isCreateMode)}
             wrapperCol={{}}
+            rules={[
+              {
+                validator: () => {
+                  if (!isCreateMode || logoImage || recordToEdit?.business_logo) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error("Logo is required"));
+                },
+              },
+            ]}
           >
             {recordToEdit && recordToEdit["business_logo"] && (
               <Image

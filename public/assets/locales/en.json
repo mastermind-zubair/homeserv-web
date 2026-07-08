@@ -180,6 +180,7 @@
   "general_default_currency": "Default currency",
   "general_default_organisation": "Default Organisation",
   "general_default_supplier": "Default Supplier",
+  "general_time_zone": "Time Zone",
   "general_description": "Description",
   "general_discount": "Discount",
   "general_discount_rate": "Discount Rate",

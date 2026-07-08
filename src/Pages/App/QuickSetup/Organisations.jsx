@@ -38,6 +38,7 @@ const Organisations = (props) => {
 
   const [form] = Form.useForm();
   const [showEditForm, setShowEditForm] = useState(false);
+  const [formMode, setFormMode] = useState("create");
 
   const [data, setData] = useState();
   const [recordToEdit, setRecordToEdit] = useState();
@@ -70,11 +71,15 @@ const Organisations = (props) => {
   };
   const handleEditForm = async (item) => {
     let record = {};
+    setLogoImage(null);
     if (item.id) {
+      setFormMode("edit");
       record = { ...item };
       record.financial_year_start = moment(record.financial_year_start);
     } else {
+      setFormMode("create");
       record.financial_year_start = moment("2022-01-01");
+      record.credits = 250;
     }
     setRecordToEdit(record);
 
@@ -109,8 +114,27 @@ const Organisations = (props) => {
        formData.append("files[]", file);
      });
     */
-    let record = values;
+    let record = { ...values };
     record.is_default = values.is_default || false;
+    if (!record.id && record.credits === undefined) {
+      record.credits = 250;
+    }
+
+    const duplicateOrganisation = data?.find(
+      (org) =>
+        org.id !== record.id &&
+        org.name?.trim().toLowerCase() === record.name?.trim().toLowerCase()
+    );
+    if (duplicateOrganisation) {
+      form.setFields([
+        {
+          name: "name",
+          errors: ["Organisation name must be unique"],
+        },
+      ]);
+      notify("Organisation name must be unique", false);
+      return;
+    }
 
     if (logoImage) {
       record.business_logo = logoImage.base64.substring(
@@ -276,6 +300,8 @@ const Organisations = (props) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         handleUploadChange={handleUploadChange}
+        logoImage={logoImage}
+        mode={formMode}
         ENTITY={ENTITY}
       />
     </>
