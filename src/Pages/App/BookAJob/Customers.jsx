@@ -21,6 +21,7 @@ function Customers(props) {
 
   const [form] = Form.useForm();
   const [showEditForm, setShowEditForm] = useState(false);
+  const [formMode, setFormMode] = useState("create");
   const [CustomerTypes, setCustomerTypes] = useState([]);
   const [recordToEdit, setRecordToEdit] = useState();
   const [data, setData] = useState([]);
@@ -80,17 +81,21 @@ function Customers(props) {
       last_name: "",
     };
     if (item.id) {
+      setFormMode("edit");
       record = { ...item };
     } else {
+      setFormMode("create");
       record.organisation_id = organisation.id;
     }
     console.log('record to edit: ', record);
     setRecordToEdit(record);
+    setShowEditForm(true);
+
     form.setFieldsValue({
+      ...record,
       ...(await extractAddressInfoAndSetForm(record.contact_address, "contact_address", true)),
       ...(await extractAddressInfoAndSetForm(record.billing_address, "billing_address", true))
     })
-    setShowEditForm(true);
   };
 
   const handleDelete = async (item) => {
@@ -114,7 +119,8 @@ function Customers(props) {
   const onFinish = async (values) => {
     formatNested(values, "contact_address");
     formatNested(values, "billing_address");
-    let record = values;
+    let record = { ...values };
+    record.use_contact_as_billing = !!record.use_contact_as_billing;
     console.log("form values", values);
 
     const { status, message } = record.id
@@ -187,6 +193,7 @@ function Customers(props) {
             ENTITY={ENTITY}
             data={{ CustomerTypes }}
             organisation={organisation}
+            mode={formMode}
           />
         </Col>
       </Row>

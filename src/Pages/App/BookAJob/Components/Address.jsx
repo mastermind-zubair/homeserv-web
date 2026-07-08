@@ -9,7 +9,8 @@ import { useTranslation } from "react-i18next";
 const { InfoItem, InfoSelect } = FormUtils;
 
 
-export default function Address({ name, readOnly, form, showMap, map_loc = null }) {
+export default function Address({ name, readOnly, form, showMap, map_loc = null, mode = "create" }) {
+  const isCreateMode = mode === "create";
 
   const [Countries, setCountries] = useState([]);
   const [States, setStates] = useState([]);
@@ -112,7 +113,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
     getLatLng();
   };
   const requiredRule = (p) => ({
-    required: true,
+    required: isCreateMode,
     message: `Please input ${p}`,
   });
   const { t } = useTranslation();
@@ -132,14 +133,14 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
           label={t("quick_setup_office_users_form_first_name")}
           name={`${name}.first_name`}
           readOnly={readOnly}
-          rules={[requiredRule("First Name")]}
+          rules={isCreateMode ? [requiredRule("First Name")] : []}
         />
         <InfoItem
           span={12}
           label={t("quick_setup_office_users_form_last_name")}
           name={`${name}.last_name`}
           readOnly={readOnly}
-          rules={[requiredRule("Last Name")]}
+          rules={isCreateMode ? [requiredRule("Last Name")] : []}
         />
       </Row>
       <Row gutter={5}>
@@ -148,7 +149,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
           label={t("label_address_line_1")}
           name={`${name}.line_1`}
           readOnly={readOnly}
-          rules={[requiredRule("Address Line 1")]}
+          rules={isCreateMode ? [requiredRule("Address Line 1")] : []}
           onFocusOut={() => { getLatLng(); }}
         />
         {/* <InfoItem 
@@ -171,7 +172,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
               handleChange={handleCountryChange}
               disabled={DisableCountry}
               readOnly={readOnly}
-              rules={[requiredRule("Country")]}
+              rules={isCreateMode ? [requiredRule("Country")] : []}
             />
             <InfoSelect
               span={6}
@@ -181,7 +182,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
               handleChange={handleStateChange}
               disabled={DisableState}
               readOnly={readOnly}
-              rules={[requiredRule("State")]}
+              rules={isCreateMode ? [requiredRule("State")] : []}
             />
             <InfoSelect
               span={6}
@@ -191,7 +192,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
               handleChange={handleCityChange}
               disabled={DisableCity}
               readOnly={readOnly}
-              rules={[requiredRule("City")]}
+              rules={isCreateMode ? [requiredRule("City")] : []}
             />
           </>
         )}
@@ -205,7 +206,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
               handleChange={handleCountryChange}
               disabled={DisableCountry}
               readOnly={readOnly}
-              rules={[requiredRule("Country")]}
+              rules={isCreateMode ? [requiredRule("Country")] : []}
             />
             <InfoItem
               span={6}
@@ -215,7 +216,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
               handleChange={handleStateChange}
               disabled={DisableState}
               readOnly={readOnly}
-              rules={[requiredRule("State")]}
+              rules={isCreateMode ? [requiredRule("State")] : []}
             />
             <InfoItem
               span={6}
@@ -225,7 +226,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
               handleChange={handleCityChange}
               disabled={DisableCity}
               readOnly={readOnly}
-              rules={[requiredRule("City")]}
+              rules={isCreateMode ? [requiredRule("City")] : []}
             />
           </>
         )}
@@ -235,7 +236,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
           label={t("general_postal_code")}
           name={`${name}.postal_code`}
           readOnly={readOnly}
-          rules={[requiredRule("Postal Code")]}
+          rules={isCreateMode ? [requiredRule("Postal Code")] : []}
         />
       </Row>
       <Row gutter={5}>
@@ -244,7 +245,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null 
           label={t("quick_setup_sub_contractors_form_mobile_number")}
           name={`${name}.mobile`}
           readOnly={readOnly}
-          rules={[requiredRule("Mobile")]}
+          rules={isCreateMode ? [requiredRule("Mobile")] : []}
         />
         <InfoItem span={6} label={t("general_phone")} name={`${name}.phone`} readOnly={readOnly} />
         {showMap && (

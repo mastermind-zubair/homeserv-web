@@ -125,6 +125,16 @@ const BookAJob = (props) => {
   const handleBillingChange = (e) => setShowBilling(e.target.checked);
   const handleSiteChange = (e) => setShowSite(e.target.checked);
   const setBookingSections = (sections) => {
+    if (typeof sections === "string") {
+      try {
+        sections = JSON.parse(sections);
+      } catch (err) {
+        sections = [];
+      }
+    }
+    if (!Array.isArray(sections)) {
+      sections = [];
+    }
     setShowDiscountTag(sections.includes("discount_tag"));
     setShowJobPriority(sections.includes("job_priority"));
     setShowServiceType(sections.includes("service_type"));
@@ -132,7 +142,7 @@ const BookAJob = (props) => {
   };
   const handleCustomerTypeChange = (e) => {
     var selected_customer = CustomerTypes.filter((v) => v.value === e.target.value);
-    const sections = JSON.parse(selected_customer[0].fk);
+    const sections = selected_customer?.[0]?.fk;
     setBookingSections(sections);
   };
 

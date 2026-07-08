@@ -1,7 +1,7 @@
 import { Col, Collapse, Form, Input, Modal, Row, Select, Checkbox } from "antd";
 import { FormButtons } from "Components/Common/FormButtons";
 import { LoadingPanelForPopup } from "Layout/LoadingPanels";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Address from "./Address";
 
@@ -15,8 +15,16 @@ function FormCustomer({
   ENTITY,
   data,
   organisation,
+  mode = "create",
 }) {
+  const isCreateMode = mode === "create";
   const [SameAsContact, setSameAsContact] = useState(true);
+  const requiredLabel = (text, required = false) => (
+    <span>
+      {text}
+      {required ? <span className="text-danger"> *</span> : null}
+    </span>
+  );
 
   const handleFirstNameChange = e => {
     form.setFieldsValue({
@@ -35,6 +43,13 @@ function FormCustomer({
   const handleUseAsBilling = e => {
     setSameAsContact(e.target.checked);
   }
+  useEffect(() => {
+    if (recordToEdit && recordToEdit.id) {
+      setSameAsContact(recordToEdit.use_contact_as_billing !== false);
+    } else {
+      setSameAsContact(true);
+    }
+  }, [recordToEdit]);
   const { t } = useTranslation()
   return (
     <>
@@ -66,10 +81,8 @@ function FormCustomer({
 
           <Form.Item
             name="customer_type_id"
-            label={t("quick_setup_customer_type_grid_heading_customer_type")}
-            rules={[
-              { required: true, message: "Please select a customer type" },
-            ]}
+            label={requiredLabel(t("quick_setup_customer_type_grid_heading_customer_type"), isCreateMode)}
+            rules={isCreateMode ? [{ required: true, message: "Please select a customer type" }] : []}
           >
             <Select
               showSearch
@@ -84,37 +97,31 @@ function FormCustomer({
           </Form.Item>
           <Form.Item
             name="email"
-            label={t("quick_setup_office_users_form_email")}
-            rules={[
-              { required: true, message: `Please input your email!` },
-            ]}
+            label={requiredLabel(t("quick_setup_office_users_form_email"), isCreateMode)}
+            rules={isCreateMode ? [{ required: true, message: `Please input your email!` }] : []}
             hasFeedback
           >
             <Input placeholder={t("quick_setup_office_users_form_email")} />
           </Form.Item>
           <Form.Item
             name="first_name"
-            label={t("quick_setup_office_users_form_first_name")}
-            rules={[
-              { required: true, message: `Please input your first name!` },
-            ]}
+            label={requiredLabel(t("quick_setup_office_users_form_first_name"), isCreateMode)}
+            rules={isCreateMode ? [{ required: true, message: `Please input your first name!` }] : []}
             hasFeedback
           >
             <Input placeholder={t("quick_setup_office_users_form_first_name")} onChange={handleFirstNameChange} />
           </Form.Item>
           <Form.Item
             name="last_name"
-            label={t("quick_setup_office_users_form_last_name")}
-            rules={[
-              { required: true, message: `Please input your last name!` },
-            ]}
+            label={requiredLabel(t("quick_setup_office_users_form_last_name"), isCreateMode)}
+            rules={isCreateMode ? [{ required: true, message: `Please input your last name!` }] : []}
             hasFeedback
           >
             <Input placeholder={t("quick_setup_office_users_form_last_name")} onChange={handleLastNameChange} />
           </Form.Item>
           <Collapse>
             <Collapse.Panel header="Contact Address" key={1}>
-              <Address name="contact_address" form={form} />
+              <Address name="contact_address" form={form} mode={mode} />
               <Row>
                 <Col span={24}>
                   <Form.Item name="use_contact_as_billing" valuePropName="checked">
@@ -125,11 +132,16 @@ function FormCustomer({
             </Collapse.Panel>
             {!SameAsContact && (
               <Collapse.Panel header="Billing Address" key={2}>
-                <Address name="billing_address" form={form} />
+                <Address name="billing_address" form={form} mode={mode} />
               </Collapse.Panel>
             )}
           </Collapse>
-          <Form.Item name="is_active" valuePropName="checked">
+          <Form.Item
+            name="is_active"
+            valuePropName="checked"
+            label={requiredLabel(t("label_active"), isCreateMode)}
+            rules={isCreateMode ? [{ required: true, message: `Please choose active status` }] : []}
+          >
             <Checkbox>{t("label_active")} </Checkbox>
           </Form.Item>
         </Form>
