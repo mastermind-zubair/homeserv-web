@@ -39,7 +39,6 @@ const Form_FieldTechnician = ({
   mode = "create",
 }) => {
   const isCreateMode = mode === "create";
-  //const [roles, setRoles] = useState();
   const [passwordSettings, setPasswordSettings] = useState(isCreateMode);
   const { curOrg: organisation } = useContext(Context);
   const [dateFormat, setDateFormat] = useState("MM-dd-YYYY");
@@ -172,10 +171,14 @@ const Form_FieldTechnician = ({
           <Form.Item
             name="username"
             label={requiredLabel(t("quick_setup_office_users_form_username_email"), isCreateMode)}
-            rules={isCreateMode ? [
-              { required: true, message: "Please input your email!" },
-              { type: "email", message: "This is not a correct email address" },
-            ] : []}
+            rules={
+              isCreateMode
+                ? [
+                    { required: true, message: "Please input your email!" },
+                    { type: "email", message: "This is not a correct email address" },
+                  ]
+                : []
+            }
             className="three-row-item"
           >
             <Input placeholder={t("quick_setup_office_users_form_email")} />
@@ -195,7 +198,7 @@ const Form_FieldTechnician = ({
 
         <Form.Item label={t("quick_setup_office_users_form_login_credentials")}>
           <div className="box-primary bg-grey p-3">
-          {recordToEdit && recordToEdit.id > 0 && (
+            {recordToEdit && recordToEdit.id > 0 && (
               <Switch
                 checked={passwordSettings}
                 checkedChildren={<span>Don't change password</span>}
@@ -210,7 +213,11 @@ const Form_FieldTechnician = ({
                 <Form.Item
                   label={requiredLabel(t("login_label_password"), isCreateMode || passwordSettings)}
                   name="password"
-                  rules={(isCreateMode || passwordSettings) ? [{ required: true, message: "Please input your password!" }] : []}
+                  rules={
+                    isCreateMode || passwordSettings
+                      ? [{ required: true, message: "Please input your password!" }]
+                      : []
+                  }
                   className="two-row-item"
                   hasFeedback
                 >
@@ -266,7 +273,12 @@ const Form_FieldTechnician = ({
         </Form.Item>
 
         <Form.Item>
-          <Form.Item name="working_areas" label={t("quick_setup_sub_contractors_form_preferred_working_areas")} className="two-row-item">
+          <Form.Item
+            name="working_areas"
+            label={requiredLabel(t("quick_setup_sub_contractors_form_preferred_working_areas"), isCreateMode)}
+            className="two-row-item"
+            rules={isCreateMode ? [{ required: true, message: "Please select at least one working area" }] : []}
+          >
             <Select mode="tags" multiple={true} options={data.workingAreas} />
           </Form.Item>
           {/* <Form.Item name="skills" label="Skills Matrix" className="two-row-item">
@@ -293,7 +305,12 @@ const Form_FieldTechnician = ({
             <Select multiple={false} options={serviceTypes} />
           </Form.Item>
 
-          <Form.Item className="three-row-item" name="job_tags" label="Job tags">
+          <Form.Item
+            className="three-row-item"
+            name="job_tags"
+            label={requiredLabel("Job tags", isCreateMode)}
+            rules={isCreateMode ? [{ required: true, message: "Please select at least one job tag" }] : []}
+          >
             <Select mode="tags" multiple={true} options={data.jobTags} />
           </Form.Item>
           {/* <Form.Item
@@ -335,13 +352,18 @@ const Form_FieldTechnician = ({
         </div> */}
 
         <div className="box-primary bg-blue box-pad mb-3" style={{ width: "100%" }}>
-          <Licenses form={form} initialValue={recordToEdit !== null ? form.getFieldValue("licenses") : null} dateFormat={dateFormat} />
+          <Licenses
+            form={form}
+            initialValue={recordToEdit !== null ? form.getFieldValue("licenses") : null}
+            dateFormat={dateFormat}
+          />
         </div>
 
         <Form.Item
           name="is_show_figures"
-          label={t("general_can_see_financial_details?")}
+          label={requiredLabel(t("general_can_see_financial_details?"), isCreateMode)}
           initialValue={false}
+          rules={isCreateMode ? [{ required: true, message: "Please choose whether this user can see financial details" }] : []}
           className="two-row-item"
         >
           <Radio.Group
@@ -366,7 +388,13 @@ const Form_FieldTechnician = ({
               ]}
             />
           </Form.Item>
-          <Form.Item name="is_active" label={t("label_status")} initialValue={true} className="three-row-item">
+          <Form.Item
+            name="is_active"
+            label={requiredLabel(t("label_status"), isCreateMode)}
+            initialValue={true}
+            rules={isCreateMode ? [{ required: true, message: "Please choose the technician status" }] : []}
+            className="three-row-item"
+          >
             <Radio.Group
               options={[
                 { label: t("label_active"), value: true },
@@ -377,8 +405,9 @@ const Form_FieldTechnician = ({
           <Form.Item
             className="three-row-item"
             name="is_apprentice"
-            label={t("quick_setup_field_technicians_form_is_this_user")}
+            label={requiredLabel(t("quick_setup_field_technicians_form_is_this_user"), isCreateMode)}
             initialValue={true}
+            rules={isCreateMode ? [{ required: true, message: "Please choose whether this user is an apprentice" }] : []}
           >
             <Radio.Group
               options={[
