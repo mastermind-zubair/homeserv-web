@@ -13,7 +13,7 @@ function StaticAddressMap({ ZoomIn, Address }) {
 
   return (
     <>
-      <StaticGoogleMap size={mapSize} zoom={ZoomIn} apiKey="AIzaSyCUnezIP5S-C4qZOf4HiJ51gK0KckxRoFs">
+      <StaticGoogleMap size={mapSize} zoom={ZoomIn} apiKey="AIzaSyA5Lq615vXza-fMv8kf6AQ493XGPZRp4Jc">
         <Marker location={Address} color="blue" label="C" />
       </StaticGoogleMap>
     </>
