@@ -60,13 +60,13 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "cross-env REACT_APP_ENV=staging craco start",
+    "start": "node api.js && cross-env REACT_APP_ENV=staging craco start",
     "build": "cross-env REACT_APP_ENV=staging craco --max_old_space_size=8192 build",
     "test": "craco test",
     "eject": "craco eject",
     "prod": "cross-env REACT_APP_ENV=production craco start",
     "staging": "cross-env REACT_APP_ENV=staging craco start",
-    "dev": "cross-env REACT_APP_ENV=development craco start",
+    "dev": "node api.js && cross-env REACT_APP_ENV=development craco start",
     "billi": "cross-env REACT_APP_ENV=bilaldev craco start"
   },
   "eslintConfig": {
