@@ -14,14 +14,14 @@ function AddressDirectionMap({ ZoomIn, Address }) {
 
   return (
     <>
-      {/* <StaticGoogleMap size={ZoomIn} apiKey="AIzaSyCUnezIP5S-C4qZOf4HiJ51gK0KckxRoFs">
+      {/* <StaticGoogleMap size={ZoomIn} apiKey="AIzaSyA5Lq615vXza-fMv8kf6AQ493XGPZRp4Jc">
         <Direction
           origin={latlan}
           destination={Address}
         />
       </StaticGoogleMap> */}
 
-      <StaticGoogleMap size={mapSize} zoom={ZoomIn} apiKey="AIzaSyCUnezIP5S-C4qZOf4HiJ51gK0KckxRoFs">
+      <StaticGoogleMap size={mapSize} zoom={ZoomIn} apiKey="AIzaSyA5Lq615vXza-fMv8kf6AQ493XGPZRp4Jc">
         <Marker location={Address} color="blue" label="C" />
       </StaticGoogleMap>
 
