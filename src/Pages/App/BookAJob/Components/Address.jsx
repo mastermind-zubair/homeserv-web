@@ -250,7 +250,7 @@ export default function Address({ name, readOnly, form, showMap, map_loc = null,
         <InfoItem span={6} label={t("general_phone")} name={`${name}.phone`} readOnly={readOnly} />
         {showMap && (
           <Col span={12}>
-            <StaticGoogleMap size="400x200" zoom={MapZoom} apiKey="AIzaSyCUnezIP5S-C4qZOf4HiJ51gK0KckxRoFs">
+            <StaticGoogleMap size="400x200" zoom={MapZoom} apiKey="AIzaSyA5Lq615vXza-fMv8kf6AQ493XGPZRp4Jc">
               <Marker location={MapLoc} color="blue" label="C" />
             </StaticGoogleMap>
           </Col>
