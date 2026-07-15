@@ -1,0 +1,27 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        # package.json "build" defaults to staging; force production for Amplify main
+        - export NODE_OPTIONS=--max_old_space_size=8192
+        - npx cross-env REACT_APP_ENV=production npx craco build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+customHeaders:
+  - pattern: '**/*'
+    headers:
+      - key: 'Strict-Transport-Security'
+        value: 'max-age=31536000; includeSubDomains'
+      - key: 'X-Content-Type-Options'
+        value: 'nosniff'
+      - key: 'X-Frame-Options'
+        value: 'SAMEORIGIN'
