@@ -14,12 +14,9 @@
 
 # IDEs and editors
 /.idea
-/.vscode
 
 # misc
 .DS_Store
-.env
-.env.*
 !.env.example
 
 #cache and log files
@@ -30,3 +27,4 @@ yarn-debug.log*
 yarn-error.log*
 
 commit.sh
+config.bat
