@@ -146,10 +146,10 @@ if (process.env.REACT_APP_ENV === "staging") {
 
 if (process.env.REACT_APP_ENV === "production") {
   environment.NAME = "PRODUCTION";
-  environment.APP_URL = "https://app.servicevault.com";
+  environment.APP_URL = "https://app.servvy.com.au";
   environment.ENVIRONMENT_CLASS = "bg-success";
   environment.PAYMENT_PORTAL_URL = "https://app.svpayments.com.au";
-  environment.API.BASE_URL = "https://api.servicevault.com";
+  environment.API.BASE_URL = "https://api.servvy.com.au";
   environment.API.VERSION = "/v1";
   environment.PATH_PROFILE_PIC = environment.API.BASE_URL + environment.API.VERSION + "/img/profile_pic";
   environment.PATH_VEHICLE_PIC = environment.API.BASE_URL + environment.API.VERSION + "/img/vehicle_pic";
@@ -163,14 +163,14 @@ if (process.env.REACT_APP_ENV === "production") {
   environment.PATH_QUOTE_PDF = environment.API.BASE_URL + environment.API.VERSION + "/pdf/quote_pdf";
   environment.PATH_COMPLIANCE_DOC = environment.API.BASE_URL + environment.API.VERSION + "/pdf/compliance_document";
 
-  environment.XERO_CALLBACK_URL = "https://app.servicevault.com/app/settings/link-accounting-software";
+  environment.XERO_CALLBACK_URL = "https://app.servvy.com.au/app/settings/link-accounting-software";
   environment.XERO_WEBHOOK_KEY =
     "yJyyWmLpg8JxjgYlvRre4jAls8+8K4LsJZbV1+NVVqv+27lVF1tPMddKQcXkxe/X6Xj90be5eReNrLMpCxYKwA==";
 
-  environment.MYOB_CALLBACK_URL = "https://app.servicevault.com/app/settings/link-accounting-software";
+  environment.MYOB_CALLBACK_URL = "https://app.servvy.com.au/app/settings/link-accounting-software";
   environment.MYOB_CLIENT_ID = "d1d9106e-06ee-4b7c-85dd-63729716cf2f";
   environment.MYOB_CLIENT_SECRET = "h4kSAMz5uGVKz244OnJWPmp2";
-  environment.REECE_CALLBACK_URL = 'https://app.servicevault.com/app/settings/link-inventory-software?reece_success=true';
+  environment.REECE_CALLBACK_URL = 'https://app.servvy.com.au/app/settings/link-inventory-software?reece_success=true';
 }
 
 if (process.env.REACT_APP_ENV === "bilaldev") {
